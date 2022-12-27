@@ -1,7 +1,7 @@
 inputSet:
-  name: <+input?>
+  name: <+pipeline.identifier>_<+pipeline.executionId>
   tags: {}
-  identifier: <+input?>
+  identifier: <+pipeline.identifier>_<+pipeline.executionId>
   orgIdentifier: <+org.identifier>
   projectIdentifier: <+project.identifier>
   pipeline:
@@ -18,8 +18,8 @@ inputSet:
                     type: Run
                     spec:
                       envVariables:
-                        input: <+input>
+                        input: "hello"
             infrastructure:
-              type: <+input>
+              type: KubernetesDirect
               spec:
-                connectorRef: <+input>
+                connectorRef: "blah"
