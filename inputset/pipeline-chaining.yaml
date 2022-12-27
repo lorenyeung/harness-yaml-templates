@@ -1,0 +1,25 @@
+inputSet:
+  name: <+input?>
+  tags: {}
+  identifier: <+input>
+  orgIdentifier: <+input>
+  projectIdentifier: <+input>
+  pipeline:
+    identifier: pipeline_chaining
+    stages:
+      - stage:
+          identifier: echo
+          type: CI
+          spec:
+            execution:
+              steps:
+                - step:
+                    identifier: echo
+                    type: Run
+                    spec:
+                      envVariables:
+                        input: <+input>
+            infrastructure:
+              type: KubernetesDirect
+              spec:
+                connectorRef: <+input>
