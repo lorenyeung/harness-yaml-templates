@@ -1,11 +1,11 @@
 inputSet:
   name: <+input?>
   tags: {}
-  identifier: <+input>
-  orgIdentifier: <+input>
-  projectIdentifier: <+input>
+  identifier: <+input?>
+  orgIdentifier: <+org.identifier>
+  projectIdentifier: <+project.identifier>
   pipeline:
-    identifier: pipeline_chaining
+    identifier: <+pipeline.identifier>
     stages:
       - stage:
           identifier: echo
@@ -20,6 +20,6 @@ inputSet:
                       envVariables:
                         input: <+input>
             infrastructure:
-              type: KubernetesDirect
+              type: <+input>
               spec:
                 connectorRef: <+input>
