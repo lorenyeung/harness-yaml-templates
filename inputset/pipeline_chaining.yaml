@@ -1,11 +1,11 @@
 inputSet:
-  name: <+pipeline.identifier>_<+pipeline.executionId>
+  name: pipeline_chaining_<+pipeline.executionId>
   tags: {}
-  identifier: <+pipeline.identifier>_<+pipeline.executionId>
+  identifier: pipeline_chaining_<+pipeline.executionId>
   orgIdentifier: <+org.identifier>
   projectIdentifier: <+project.identifier>
   pipeline:
-    identifier: <+pipeline.identifier>
+    identifier: pipeline_chaining
     stages:
       - stage:
           identifier: echo
