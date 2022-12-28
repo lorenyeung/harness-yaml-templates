@@ -2,8 +2,8 @@ inputSet:
   name: pipeline_chaining_one
   tags: {}
   identifier: pipeline_chaining_one
-  orgIdentifier: <+org.identifier>
-  projectIdentifier: <+project.identifier>
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
   pipeline:
     identifier: pipeline_chaining
     stages:
