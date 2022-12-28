@@ -1,7 +1,7 @@
 inputSet:
-  name: pipeline_chaining_<+pipeline.executionId>
+  name: pipeline_chaining_one
   tags: {}
-  identifier: pipeline_chaining_<+pipeline.executionId>
+  identifier: pipeline_chaining_one
   orgIdentifier: <+org.identifier>
   projectIdentifier: <+project.identifier>
   pipeline:
@@ -11,15 +11,11 @@ inputSet:
           identifier: echo
           type: CI
           spec:
-            execution:
-              steps:
-                - step:
-                    identifier: echo
-                    type: Run
-                    spec:
-                      envVariables:
-                        input: "hello"
             infrastructure:
               type: KubernetesDirect
               spec:
-                connectorRef: "blah"
+                connectorRef: "account.colimak8s"
+    variables:
+      - name: input
+        type: String
+        value: "git"
