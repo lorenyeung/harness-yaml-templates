@@ -3,7 +3,7 @@ featureFlags:
   - flag:
       name: Builds Module
       identifier: Builds_Module
-      description: ""
+      description: "this is a description"
       permanent: false
       spec:
         type: boolean
