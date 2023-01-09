@@ -75,7 +75,7 @@ featureFlags:
   - flag:
       name: Trial Length
       identifier: Trial_Length
-      description: ""
+      description: "this is another description"
       permanent: false
       spec:
         type: string
