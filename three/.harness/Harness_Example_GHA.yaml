@@ -32,7 +32,7 @@ pipeline:
                       with:
                         appname: vera
                         createprofile: false
-                        filepath: /harness/codecov-test2/target/codecov-test2-1.0-SNAPSHOT.jar
+                        filepath: /harness/codecov-test2-1.0-SNAPSHOT.jar
                         version: 1
                         vid: <+secrets.getValue("veracode_id")>
                         vkey: <+secrets.getValue("veracode_key")>
