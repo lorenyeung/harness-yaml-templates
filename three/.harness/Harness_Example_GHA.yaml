@@ -37,6 +37,9 @@ pipeline:
                         vid: <+secrets.getValue("veracode_id")>
                         vkey: <+secrets.getValue("veracode_key")>
                     imagePullPolicy: IfNotPresent
+                    resources:
+                      limits:
+                        cpu: 200m
                   failureStrategies:
                     - onFailure:
                         errors:
@@ -61,6 +64,9 @@ pipeline:
                         blackduck-url: <+secrets.getValue("bd_password")>
                         blackduck-api-token: <+secrets.getValue("bd_password")>
                     imagePullPolicy: IfNotPresent
+                    resources:
+                      limits:
+                        cpu: 200m
                   failureStrategies:
                     - onFailure:
                         errors:
@@ -85,6 +91,9 @@ pipeline:
                         output-file: kube-linter.json
                       action_image: lorenharness/alpine-jq-yq-curl-bash-grep
                     imagePullPolicy: IfNotPresent
+                    resources:
+                      limits:
+                        cpu: 200m
                   failureStrategies:
                     - onFailure:
                         errors:
