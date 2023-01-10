@@ -13,7 +13,7 @@ pipeline:
     - stage:
         name: gha
         identifier: gha
-        description: ""
+        description: test
         type: CI
         spec:
           cloneCodebase: true
