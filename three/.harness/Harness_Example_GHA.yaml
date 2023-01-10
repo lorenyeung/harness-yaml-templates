@@ -97,7 +97,7 @@ pipeline:
             type: KubernetesDirect
             spec:
               connectorRef: lorenharnesscluster
-              namespace: test
+              namespace: informatica
               automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
