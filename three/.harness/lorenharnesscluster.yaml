@@ -1,0 +1,15 @@
+connector:
+  name: lorenharness-cluster
+  identifier: lorenharnesscluster
+  description: ""
+  orgIdentifier: default
+  projectIdentifier: CI_Quickstart
+  tags:
+    lorenharness: ""
+    informatica: ""
+  type: K8sCluster
+  spec:
+    credential:
+      type: InheritFromDelegate
+    delegateSelectors:
+    - lorenharness

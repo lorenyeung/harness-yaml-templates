@@ -1,0 +1,103 @@
+pipeline:
+  name: Harness Example - GHA
+  identifier: Harness_Example_GHA
+  projectIdentifier: CI_Quickstart
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: org.harnesssamplegh
+        build: <+input>
+  stages:
+    - stage:
+        name: gha
+        identifier: gha
+        description: test
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Plugin
+                  name: veracode
+                  identifier: veracode
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: plugins/github-actions
+                    privileged: true
+                    settings:
+                      uses: veracode/veracode-uploadandscan-action@0.2.4
+                      with:
+                        appname: vera
+                        createprofile: false
+                        filepath: /harness/codecov-test2/target/codecov-test2-1.0-SNAPSHOT.jar
+                        version: 1
+                        vid: <+secrets.getValue("veracode_id")>
+                        vkey: <+secrets.getValue("veracode_key")>
+                    imagePullPolicy: IfNotPresent
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Ignore
+                  when:
+                    stageStatus: Success
+              - step:
+                  type: Plugin
+                  name: blackduck
+                  identifier: blackduck
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: plugins/github-actions
+                    privileged: true
+                    settings:
+                      uses: synopsys-sig/detect-action@v0.3.4
+                      with:
+                        github-token: <+secrets.getValue("changeme")>
+                        detect-version: 8.4.0
+                        blackduck-url: <+secrets.getValue("changeme")>
+                        blackduck-api-token: <+secrets.getValue("bd_password")>
+                    imagePullPolicy: IfNotPresent
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Ignore
+                  when:
+                    stageStatus: Success
+              - step:
+                  type: Plugin
+                  name: stackrox
+                  identifier: stackrox
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: plugins/github-actions
+                    privileged: true
+                    settings:
+                      uses: stackrox/kube-linter-action@v1.0.4
+                      with:
+                        directory: /harness/yamls
+                        format: json
+                        output-file: kube-linter.json
+                      action_image: lorenharness/alpine-jq-yq-curl-bash-grep
+                    imagePullPolicy: IfNotPresent
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Ignore
+                  when:
+                    stageStatus: Success
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: lorenharnesscluster
+              namespace: informatica
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
