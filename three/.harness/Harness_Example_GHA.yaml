@@ -28,6 +28,86 @@ pipeline:
                     image: bash
                     shell: Sh
                     command: echo "test"
+              - step:
+                  type: Plugin
+                  name: veracode
+                  identifier: veracode
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: plugins/github-actions
+                    privileged: true
+                    settings:
+                      uses: veracode/veracode-uploadandscan-action@0.2.4
+                      with:
+                        appname: vera
+                        createprofile: false
+                        filepath: /harness/codecov-test2/target/codecov-test2-1.0-SNAPSHOT.jar
+                        version: 1
+                        vid: id
+                        vkey: key
+                    imagePullPolicy: IfNotPresent
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Ignore
+                  description: See in CI-quickstart
+                  when:
+                    stageStatus: Success
+                    condition: <+account.companyName> == 'skip'
+              - step:
+                  type: Plugin
+                  name: blackduck
+                  identifier: blackduck
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: plugins/github-actions
+                    privileged: true
+                    settings:
+                      uses: synopsys-sig/detect-action@v0.3.4
+                      with:
+                        github-token: <+secrets.getValue("changeme")>
+                        detect-version: 8.4.0
+                        blackduck-url: <+secrets.getValue("changeme")>
+                        blackduck-api-token: <+secrets.getValue("changeme")>
+                    imagePullPolicy: IfNotPresent
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Ignore
+                  description: See in CI-quickstart
+                  when:
+                    stageStatus: Success
+                    condition: <+account.companyName> == 'skip'
+              - step:
+                  type: Plugin
+                  name: stackrox
+                  identifier: stackrox
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: plugins/github-actions
+                    privileged: true
+                    settings:
+                      uses: stackrox/kube-linter-action@v1.0.4
+                      with:
+                        directory: /harness/yamls
+                        format: json
+                        output-file: kube-linter.json
+                      action_image: lorenharness/alpine-jq-yq-curl-bash-grep
+                    imagePullPolicy: IfNotPresent
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Ignore
+                  description: See in CI-quickstart
+                  when:
+                    stageStatus: Success
+                    condition: <+account.companyName> == 'skip'
           infrastructure:
             type: KubernetesDirect
             spec:
