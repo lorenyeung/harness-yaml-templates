@@ -96,7 +96,8 @@ pipeline:
           infrastructure:
             type: KubernetesDirect
             spec:
-              connectorRef: test
+              connectorRef: lorenharnesscluster
               namespace: test
+              automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
