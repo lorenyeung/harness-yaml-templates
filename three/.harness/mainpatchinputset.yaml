@@ -1,0 +1,16 @@
+inputSet:
+  identifier: "mainpatchinputset"
+  pipeline:
+    identifier: "Harness_Example_GHA"
+    properties:
+      ci:
+        codebase:
+          build:
+            type: "branch"
+            spec:
+              branch: "main-patch"
+  name: "main-patch-inputset"
+  tags:
+    lorenharness: ""
+  orgIdentifier: "default"
+  projectIdentifier: "CI_Quickstart"
