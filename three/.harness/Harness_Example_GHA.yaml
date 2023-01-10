@@ -20,15 +20,6 @@ pipeline:
           execution:
             steps:
               - step:
-                  type: Run
-                  name: test
-                  identifier: test
-                  spec:
-                    connectorRef: dockerhub
-                    image: bash
-                    shell: Sh
-                    command: echo "test"
-              - step:
                   type: Plugin
                   name: veracode
                   identifier: veracode
@@ -43,8 +34,8 @@ pipeline:
                         createprofile: false
                         filepath: /harness/codecov-test2/target/codecov-test2-1.0-SNAPSHOT.jar
                         version: 1
-                        vid: id
-                        vkey: key
+                        vid: <+secrets.getValue("veracode_id")>
+                        vkey: <+secrets.getValue("veracode_key")>
                     imagePullPolicy: IfNotPresent
                   failureStrategies:
                     - onFailure:
@@ -52,10 +43,8 @@ pipeline:
                           - AllErrors
                         action:
                           type: Ignore
-                  description: See in CI-quickstart
                   when:
                     stageStatus: Success
-                    condition: <+account.companyName> == 'skip'
               - step:
                   type: Plugin
                   name: blackduck
@@ -70,7 +59,7 @@ pipeline:
                         github-token: <+secrets.getValue("changeme")>
                         detect-version: 8.4.0
                         blackduck-url: <+secrets.getValue("changeme")>
-                        blackduck-api-token: <+secrets.getValue("changeme")>
+                        blackduck-api-token: <+secrets.getValue("bd_password")>
                     imagePullPolicy: IfNotPresent
                   failureStrategies:
                     - onFailure:
@@ -78,10 +67,8 @@ pipeline:
                           - AllErrors
                         action:
                           type: Ignore
-                  description: See in CI-quickstart
                   when:
                     stageStatus: Success
-                    condition: <+account.companyName> == 'skip'
               - step:
                   type: Plugin
                   name: stackrox
@@ -107,7 +94,6 @@ pipeline:
                   description: See in CI-quickstart
                   when:
                     stageStatus: Success
-                    condition: <+account.companyName> == 'skip'
           infrastructure:
             type: KubernetesDirect
             spec:
