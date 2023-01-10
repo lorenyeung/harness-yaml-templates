@@ -56,9 +56,9 @@ pipeline:
                     settings:
                       uses: synopsys-sig/detect-action@v0.3.4
                       with:
-                        github-token: <+secrets.getValue("changeme")>
+                        github-token: <+secrets.getValue("bd_password")>
                         detect-version: 8.4.0
-                        blackduck-url: <+secrets.getValue("changeme")>
+                        blackduck-url: <+secrets.getValue("bd_password")>
                         blackduck-api-token: <+secrets.getValue("bd_password")>
                     imagePullPolicy: IfNotPresent
                   failureStrategies:
