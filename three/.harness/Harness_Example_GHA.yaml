@@ -49,6 +49,24 @@ pipeline:
                   when:
                     stageStatus: Success
               - step:
+                  type: Run
+                  name: create jwt token
+                  identifier: create_jwt_token
+                  spec:
+                    connectorRef: lorenharnessdockerhub
+                    image: python
+                    shell: Sh
+                    command: |-
+                      pip3 install PyJWT cryptography requests
+                      echo '<+secrets.getValue("gh-app-pem")>' > file
+                      export jwt=$(python3 /harness/create-jwt.py file <+secrets.getValue("gh-app-id")> 2> /dev/null)
+                    outputVariables:
+                      - name: jwt
+                    imagePullPolicy: IfNotPresent
+                    resources:
+                      limits:
+                        cpu: 200m
+              - step:
                   type: Plugin
                   name: blackduck
                   identifier: blackduck
@@ -59,20 +77,14 @@ pipeline:
                     settings:
                       uses: synopsys-sig/detect-action@v0.3.4
                       with:
-                        github-token: <+secrets.getValue("bd_password")>
+                        github-token: <+execution.steps.create_jwt_token.output.outputVariables.jwt>
                         detect-version: 8.4.0
-                        blackduck-url: <+secrets.getValue("bd_password")>
+                        blackduck-url: informatica.app.blackduck.com
                         blackduck-api-token: <+secrets.getValue("bd_password")>
                     imagePullPolicy: IfNotPresent
                     resources:
                       limits:
                         cpu: 200m
-                  failureStrategies:
-                    - onFailure:
-                        errors:
-                          - AllErrors
-                        action:
-                          type: Ignore
                   when:
                     stageStatus: Success
               - step:
@@ -94,12 +106,6 @@ pipeline:
                     resources:
                       limits:
                         cpu: 200m
-                  failureStrategies:
-                    - onFailure:
-                        errors:
-                          - AllErrors
-                        action:
-                          type: Ignore
                   when:
                     stageStatus: Success
           infrastructure:
