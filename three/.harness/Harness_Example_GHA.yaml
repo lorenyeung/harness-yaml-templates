@@ -111,7 +111,7 @@ pipeline:
           infrastructure:
             type: KubernetesDirect
             spec:
-              connectorRef: lorenharnesscluster
+              connectorRef: org.lorenharnessawsorgcluster
               namespace: informatica
               automountServiceAccountToken: true
               nodeSelector: {}
