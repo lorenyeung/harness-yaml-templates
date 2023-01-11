@@ -1,5 +1,5 @@
 connector:
-  name: lorenharness-cluster
+  name: lorenharness-aws-cluster
   identifier: lorenharnesscluster
   description: ""
   orgIdentifier: default
@@ -12,4 +12,4 @@ connector:
     credential:
       type: InheritFromDelegate
     delegateSelectors:
-    - lorenharness
+    - lorenharness-aws-delegate
