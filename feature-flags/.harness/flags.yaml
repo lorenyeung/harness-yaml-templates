@@ -26,14 +26,40 @@ featureFlags:
           onVariation: "false"
           offVariation: "false"
         state: "off"
-      - identifier: c1
+      - identifier: dev
         default:
           onVariation: "false"
           offVariation: "false"
         state: "off"
+  - flag:
+      name: git-test
+      identifier: gittest
+      description: ""
+      permanent: false
+      spec:
+        type: boolean
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        variations:
+        - identifier: "true"
+          value: "true"
+        - identifier: "false"
+          value: "false"
+      environments:
+      - identifier: prod
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: localmbp
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
       - identifier: dev
         default:
-          onVariation: "false"
+          onVariation: "true"
           offVariation: "false"
         state: "off"
   - flag:
@@ -62,11 +88,6 @@ featureFlags:
           onVariation: "true"
           offVariation: "false"
         state: "off"
-      - identifier: c1
-        default:
-          onVariation: "true"
-          offVariation: "false"
-        state: "off"
       - identifier: dev
         default:
           onVariation: "true"
@@ -75,7 +96,7 @@ featureFlags:
   - flag:
       name: Trial Length
       identifier: Trial_Length
-      description: "this is another description"
+      description: this is another description
       permanent: false
       spec:
         type: string
@@ -96,11 +117,6 @@ featureFlags:
           offVariation: Seven_Day_Trial
         state: "off"
       - identifier: localmbp
-        default:
-          onVariation: Seven_Day_Trial
-          offVariation: Seven_Day_Trial
-        state: "off"
-      - identifier: c1
         default:
           onVariation: Seven_Day_Trial
           offVariation: Seven_Day_Trial
