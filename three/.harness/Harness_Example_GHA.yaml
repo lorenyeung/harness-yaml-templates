@@ -121,6 +121,7 @@ pipeline:
                         detect-version: 8.4.0
                         blackduck-url: https://informatica.app.blackduck.com
                         blackduck-api-token: <+secrets.getValue("bd_password")>
+                      action_image: lorenharness/blackduck-gha
                     imagePullPolicy: IfNotPresent
                     resources:
                       limits:
