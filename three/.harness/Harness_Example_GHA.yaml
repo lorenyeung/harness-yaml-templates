@@ -44,13 +44,24 @@ pipeline:
                         command: |-
                           pip3 install PyJWT cryptography requests
                           echo '<+secrets.getValue("lorenharnessblackduckapppem")>' > file
-                          export gh_token=$(python3 /harness/ci/github-actions/gh-app-token-create/create-token.py file <+stage.variables.GH_APP_ID> 2> /dev/null)
+                          export gh_token=$(python3 /harness/ci/github-actions/gh-app-token-create/create-token.py file <+stage.variables.GH_APP_ID> <+stage.variables.GH_INSTALLATION_ID> 2> /dev/null)
                         outputVariables:
                           - name: gh_token
                         imagePullPolicy: IfNotPresent
                         resources:
                           limits:
                             cpu: 200m
+              - step:
+                  type: Run
+                  name: export token
+                  identifier: export_token
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: bash
+                    shell: Sh
+                    command: gh_token=`cat /harness/gh_app_token 2>/dev/null`
+                    outputVariables:
+                      - name: gh_token
               - step:
                   type: Run
                   name: mvn build
@@ -60,13 +71,10 @@ pipeline:
                     image: maven
                     shell: Sh
                     command: |-
-                      gh_token=`cat /harness/gh_app_token 2>/dev/null`
                       cd /harness/ci/maven/codecov-travis-maven-junit5-example
                       mvn clean package
                       cp -r /harness/ci/maven/codecov-travis-maven-junit5-example/* /harness
                       ls /harness
-                    outputVariables:
-                      - name: gh_token
               - step:
                   type: Plugin
                   name: veracode
@@ -107,7 +115,7 @@ pipeline:
                     settings:
                       uses: synopsys-sig/detect-action@v0.3.4
                       with:
-                        github-token: <+execution.steps.create_jwt_token.output.outputVariables.gh_token>
+                        github-token: <+execution.steps.export_token.output.outputVariables.gh_token>
                         detect-version: 8.4.0
                         blackduck-url: https://informatica.app.blackduck.com
                         blackduck-api-token: <+secrets.getValue("bd_password")>
@@ -132,7 +140,7 @@ pipeline:
                     image: plugins/github-actions
                     privileged: true
                     envVariables:
-                      GITHUB_TOKEN: <+execution.steps.create_jwt_token.output.outputVariables.gh_token>
+                      GITHUB_TOKEN: <+execution.steps.export_token.output.outputVariables.gh_token>
                     settings:
                       uses: stackrox/kube-linter-action@v1.0.4
                       with:
