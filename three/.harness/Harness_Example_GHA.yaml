@@ -13,12 +13,41 @@ pipeline:
     - stage:
         name: gha
         identifier: gha
-        description: test2
+        description: ""
         type: CI
         spec:
           cloneCodebase: true
           execution:
             steps:
+              - step:
+                  type: Plugin
+                  name: get GH app token
+                  identifier: get_GH_app_token
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: rssnyder/drone-github-app
+                    settings:
+                      APP_ID: <+stage.variables.GH_APP_ID>
+                      PEM: <+secrets.getValue("lorenharnessblackduckapppem")>
+                      TOKEN_FILE: /harness/gh_app_token
+                      INSTALLATION: <+stage.variables.GH_INSTALLATION_ID>
+                    imagePullPolicy: IfNotPresent
+              - step:
+                  type: Run
+                  name: mvn build
+                  identifier: mvn_build
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: maven
+                    shell: Sh
+                    command: |-
+                      gh_token=`cat /harness/gh_app_token 2>/dev/null`
+                      cd /harness/ci/maven/codecov-travis-maven-junit5-example
+                      mvn clean package
+                      cp -r /harness/ci/maven/codecov-travis-maven-junit5-example/* /harness
+                      ls /harness
+                    outputVariables:
+                      - name: gh_token
               - step:
                   type: Plugin
                   name: veracode
@@ -58,10 +87,10 @@ pipeline:
                     shell: Sh
                     command: |-
                       pip3 install PyJWT cryptography requests
-                      echo '<+secrets.getValue("gh-app-pem")>' > file
-                      export jwt=$(python3 /harness/ci/github-actions/gh-app-token-create/create-token.py file <+secrets.getValue("gh-app-id")> 2> /dev/null)
+                      echo '<+secrets.getValue("lorenharnessblackduckapppem")>' > file
+                      export gh_token=$(python3 /harness/ci/github-actions/gh-app-token-create/create-token.py file <+stage.variables.GH_APP_ID> 2> /dev/null)
                     outputVariables:
-                      - name: jwt
+                      - name: gh_token
                     imagePullPolicy: IfNotPresent
                     resources:
                       limits:
@@ -77,7 +106,7 @@ pipeline:
                     settings:
                       uses: synopsys-sig/detect-action@v0.3.4
                       with:
-                        github-token: <+execution.steps.create_jwt_token.output.outputVariables.jwt>
+                        github-token: <+execution.steps.create_jwt_token.output.outputVariables.gh_token>
                         detect-version: 8.4.0
                         blackduck-url: informatica.app.blackduck.com
                         blackduck-api-token: <+secrets.getValue("bd_password")>
@@ -95,6 +124,8 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: plugins/github-actions
                     privileged: true
+                    envVariables:
+                      GITHUB_TOKEN: <+execution.steps.create_jwt_token.output.outputVariables.gh_token>
                     settings:
                       uses: stackrox/kube-linter-action@v1.0.4
                       with:
