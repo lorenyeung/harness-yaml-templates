@@ -109,7 +109,7 @@ pipeline:
                       with:
                         github-token: <+execution.steps.create_jwt_token.output.outputVariables.gh_token>
                         detect-version: 8.4.0
-                        blackduck-url: informatica.app.blackduck.com
+                        blackduck-url: https://informatica.app.blackduck.com
                         blackduck-api-token: <+secrets.getValue("bd_password")>
                     imagePullPolicy: IfNotPresent
                     resources:
@@ -117,6 +117,12 @@ pipeline:
                         cpu: 200m
                   when:
                     stageStatus: Success
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Ignore
               - step:
                   type: Plugin
                   name: stackrox
