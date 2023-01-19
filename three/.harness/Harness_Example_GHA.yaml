@@ -53,13 +53,15 @@ pipeline:
                             cpu: 200m
               - step:
                   type: Run
-                  name: export token
+                  name: export token - drone
                   identifier: export_token
                   spec:
                     connectorRef: account.harnessImage
                     image: bash
                     shell: Sh
-                    command: gh_token=`cat /harness/gh_app_token 2>/dev/null`
+                    command: |-
+                      # drone method
+                      gh_token=`cat /harness/gh_app_token 2>/dev/null`
                     outputVariables:
                       - name: gh_token
               - step:
