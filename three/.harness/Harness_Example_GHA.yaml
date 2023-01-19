@@ -78,7 +78,7 @@ pipeline:
                     settings:
                       uses: veracode/veracode-uploadandscan-action@0.2.4
                       with:
-                        appname: vera
+                        appname: harness-yaml-templates
                         createprofile: false
                         filepath: /harness/ci/maven/codecov-travis-maven-junit5-example/codecov-test2/target/codecov-test2-1.0-SNAPSHOT.jar
                         version: 1.0-SNAPSHOT
