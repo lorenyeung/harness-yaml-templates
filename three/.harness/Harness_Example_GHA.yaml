@@ -81,7 +81,7 @@ pipeline:
                         appname: vera
                         createprofile: false
                         filepath: /harness/ci/maven/codecov-travis-maven-junit5-example/codecov-test2/target/codecov-test2-1.0-SNAPSHOT.jar
-                        version: 1
+                        version: 1.0-SNAPSHOT
                         vid: <+secrets.getValue("veracode_id")>
                         vkey: <+secrets.getValue("veracode_key")>
                     imagePullPolicy: IfNotPresent
