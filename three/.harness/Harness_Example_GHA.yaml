@@ -152,8 +152,8 @@ pipeline:
           - name: GH_APP_ID
             type: String
             description: ""
-            value: "278216"
+            value: <+secrets.getValue("lorenharness_gh_app_id")>
           - name: GH_INSTALLATION_ID
             type: String
             description: ""
-            value: ""
+            value: <+secrets.getValue("lorenharness_gh_installation_id")>
