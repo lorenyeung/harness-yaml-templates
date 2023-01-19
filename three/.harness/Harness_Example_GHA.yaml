@@ -19,19 +19,38 @@ pipeline:
           cloneCodebase: true
           execution:
             steps:
-              - step:
-                  type: Plugin
-                  name: get GH app token
-                  identifier: get_GH_app_token
-                  spec:
-                    connectorRef: account.harnessImage
-                    image: rssnyder/drone-github-app
-                    settings:
-                      APP_ID: <+stage.variables.GH_APP_ID>
-                      PEM: <+secrets.getValue("lorenharnessblackduckapppem")>
-                      TOKEN_FILE: /harness/gh_app_token
-                      INSTALLATION: <+stage.variables.GH_INSTALLATION_ID>
-                    imagePullPolicy: IfNotPresent
+              - parallel:
+                  - step:
+                      type: Plugin
+                      name: get GH app token - drone plugin
+                      identifier: get_GH_app_token
+                      spec:
+                        connectorRef: account.harnessImage
+                        image: rssnyder/drone-github-app
+                        settings:
+                          APP_ID: <+stage.variables.GH_APP_ID>
+                          PEM: <+secrets.getValue("lorenharnessblackduckapppem")>
+                          TOKEN_FILE: /harness/gh_app_token
+                          INSTALLATION: <+stage.variables.GH_INSTALLATION_ID>
+                        imagePullPolicy: IfNotPresent
+                  - step:
+                      type: Run
+                      name: create gh token - python
+                      identifier: create_jwt_token
+                      spec:
+                        connectorRef: account.harnessImage
+                        image: python
+                        shell: Sh
+                        command: |-
+                          pip3 install PyJWT cryptography requests
+                          echo '<+secrets.getValue("lorenharnessblackduckapppem")>' > file
+                          export gh_token=$(python3 /harness/ci/github-actions/gh-app-token-create/create-token.py file <+stage.variables.GH_APP_ID> 2> /dev/null)
+                        outputVariables:
+                          - name: gh_token
+                        imagePullPolicy: IfNotPresent
+                        resources:
+                          limits:
+                            cpu: 200m
               - step:
                   type: Run
                   name: mvn build
@@ -77,24 +96,6 @@ pipeline:
                           type: Ignore
                   when:
                     stageStatus: Success
-              - step:
-                  type: Run
-                  name: create jwt token
-                  identifier: create_jwt_token
-                  spec:
-                    connectorRef: lorenharnessdockerhub
-                    image: python
-                    shell: Sh
-                    command: |-
-                      pip3 install PyJWT cryptography requests
-                      echo '<+secrets.getValue("lorenharnessblackduckapppem")>' > file
-                      export gh_token=$(python3 /harness/ci/github-actions/gh-app-token-create/create-token.py file <+stage.variables.GH_APP_ID> 2> /dev/null)
-                    outputVariables:
-                      - name: gh_token
-                    imagePullPolicy: IfNotPresent
-                    resources:
-                      limits:
-                        cpu: 200m
               - step:
                   type: Plugin
                   name: blackduck
