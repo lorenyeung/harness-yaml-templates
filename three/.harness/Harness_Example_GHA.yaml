@@ -148,3 +148,12 @@ pipeline:
               automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
+        variables:
+          - name: GH_APP_ID
+            type: String
+            description: ""
+            value: "278216"
+          - name: GH_INSTALLATION_ID
+            type: String
+            description: ""
+            value: ""
