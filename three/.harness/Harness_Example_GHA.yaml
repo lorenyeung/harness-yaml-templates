@@ -75,8 +75,6 @@ pipeline:
                     command: |-
                       cd /harness/ci/maven/codecov-travis-maven-junit5-example
                       mvn clean package
-                      cp -r /harness/ci/maven/codecov-travis-maven-junit5-example/* /harness
-                      ls /harness
               - step:
                   type: Plugin
                   name: veracode
@@ -122,6 +120,8 @@ pipeline:
                         blackduck-url: https://informatica.app.blackduck.com
                         blackduck-api-token: <+secrets.getValue("bd_password")>
                       action_image: lorenharness/blackduck-gha
+                    envVariables:
+                      DETECT_SOURCE_PATH: /harness/ci/maven/codecov-travis-maven-junit5-example/
                     imagePullPolicy: IfNotPresent
                     resources:
                       limits:
