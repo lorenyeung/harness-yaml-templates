@@ -7,7 +7,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - id: scan
-      uses: ./ci/github-actions/stackrox/stackrox-scan
+      uses: stackrox/contributions/ci/GitHub/stackrox-action/.github/actions/stackrox-scan@main
       with:
         image: 'vulnerables/cve-2017-7494'
         central-endpoint: ${{ secrets.ROX_CENTRAL_ENDPOINT }}
