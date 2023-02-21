@@ -18,4 +18,4 @@ inputSet:
     variables:
       - name: input
         type: String
-        value: "git7"
+        value: "git8"
