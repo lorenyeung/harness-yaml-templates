@@ -1,0 +1,21 @@
+inputSet:
+  name: pipeline_chaining_two
+  tags: {}
+  identifier: pipeline_chaining_two
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
+  pipeline:
+    identifier: pipeline_chaining
+    stages:
+      - stage:
+          identifier: echo
+          type: CI
+          spec:
+            infrastructure:
+              type: KubernetesDirect
+              spec:
+                connectorRef: "account.colimak8s"
+    variables:
+      - name: input
+        type: String
+        value: "twogit9"
