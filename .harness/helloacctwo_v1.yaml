@@ -1,0 +1,12 @@
+template:
+  name: hello-acc-two
+  type: Step
+  spec:
+    type: Run
+    spec:
+      connectorRef: account.harnessImage
+      image: alpine
+      shell: Sh
+      command: echo "hey"
+  identifier: helloacctwo
+  versionLabel: v1
