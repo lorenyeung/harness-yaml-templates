@@ -20,12 +20,6 @@ pipeline:
                   template:
                     templateRef: hello
                     versionLabel: v1
-              - step:
-                  name: run4
-                  identifier: run4
-                  template:
-                    templateRef: account.hello3
-                    versionLabel: v1
           infrastructure:
             type: KubernetesDirect
             spec:
