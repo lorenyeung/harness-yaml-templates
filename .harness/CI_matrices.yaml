@@ -66,7 +66,7 @@ pipeline:
                     image: lorenharness/alpine-jq-yq-curl-bash
                     shell: Bash
                     command: |-
-                      echo <+matrix.type2> "matrix"
+                      echo <+matrix.type2> "matrix2"
 
                         curl -s \
                         -X POST \
@@ -85,3 +85,8 @@ pipeline:
           matrix:
             type2: <+pipeline.stages.DetermineMatrix.spec.execution.steps.Run_1.output.outputVariables.types>.split(',')
   variables: []
+  properties:
+    ci:
+      codebase:
+        connectorRef: ghrepoharnessyamltemplates
+        build: <+input>
