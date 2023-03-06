@@ -85,3 +85,8 @@ pipeline:
           matrix:
             type2: <+pipeline.stages.DetermineMatrix.spec.execution.steps.Run_1.output.outputVariables.types>.split(',')
   variables: []
+  properties:
+    ci:
+      codebase:
+        connectorRef: ghrepoharnessyamltemplates
+        build: <+input>
