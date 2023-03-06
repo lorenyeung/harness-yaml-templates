@@ -66,7 +66,7 @@ pipeline:
                     image: alpine
                     shell: Sh
                     command: |-
-                      echo <+matrix.type2>
+                      echo <+matrix.type2> "matrix"
 
                         curl -s \
                         -X POST \
