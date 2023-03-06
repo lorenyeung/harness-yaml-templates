@@ -1,0 +1,12 @@
+template:
+  name: hello3
+  type: Step
+  spec:
+    type: Run
+    spec:
+      connectorRef: account.harnessImage
+      image: alpine
+      shell: Sh
+      command: echo "hello"
+  identifier: hello3
+  versionLabel: v1

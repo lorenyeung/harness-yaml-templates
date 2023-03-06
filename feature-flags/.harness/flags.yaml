@@ -16,6 +16,11 @@ featureFlags:
         - identifier: "false"
           value: "false"
       environments:
+      - identifier: hi
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
       - identifier: prod
         default:
           onVariation: "false"
@@ -47,6 +52,11 @@ featureFlags:
         - identifier: "false"
           value: "false"
       environments:
+      - identifier: hi
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
       - identifier: prod
         default:
           onVariation: "true"
@@ -78,6 +88,11 @@ featureFlags:
         - identifier: "false"
           value: "false"
       environments:
+      - identifier: hi
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
       - identifier: prod
         default:
           onVariation: "true"
@@ -111,6 +126,11 @@ featureFlags:
         - identifier: Twenty_Day_Trial
           value: 20 Day Trial
       environments:
+      - identifier: hi
+        default:
+          onVariation: Seven_Day_Trial
+          offVariation: Seven_Day_Trial
+        state: "off"
       - identifier: prod
         default:
           onVariation: Seven_Day_Trial
