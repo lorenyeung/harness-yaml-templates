@@ -88,7 +88,7 @@ pipeline:
                   identifier: Run_1
                   spec:
                     connectorRef: account.harnessImage
-                    image: alpine
+                    image: lorenharness/alpine-jq-yq-curl-bash
                     shell: Sh
                     command: |-
                       echo "hello"
