@@ -65,7 +65,22 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: alpine
                     shell: Sh
-                    command: echo <+matrix.type2>
+                    command: |-
+                      echo <+matrix.type2>
+
+                        curl -s \
+                        -X POST \
+                        -H "Authorization: Bearer <+secrets.getValue('account.ghpatsecretacc')>" \
+                        -H "Accept: application/vnd.github.v3+json" \
+                        https://api.github.com/repos/lorenyeung/harness-yaml-templates/statuses/<+codebase.commitSha> \
+                        -d '{"state":"pending","target_url":"<+pipeline.execution.url>","description":"Is running <+step.identifier>","context":"harness-ci/tests"}'
+
+                          curl -s \
+                        -X POST \
+                        -H "Authorization: Bearer <+secrets.getValue('account.ghpatsecretacc')>" \
+                        -H "Accept: application/vnd.github.v3+json" \
+                        https://api.github.com/repos/lorenyeung/harness-yaml-templates/statuses/<+codebase.commitSha> \
+                        -d '{"state":"success","target_url":"<+pipeline.execution.url>","description":"Is success <+step.identifier>","context":"harness-ci/tests"}'
         strategy:
           matrix:
             type2: <+pipeline.stages.DetermineMatrix.spec.execution.steps.Run_1.output.outputVariables.types>.split(',')
