@@ -97,7 +97,7 @@ pipeline:
                         -X POST \
                         -H "Authorization: Bearer <+secrets.getValue('account.ghpatsecretacc')>" \
                         -H "Accept: application/vnd.github.v3+json" \
-                        https://api.github.com/repos/lorenyeung/<+pipeline.properties.ci.codebase.repoName>/statuses/<+codebase.commitSha> \
+                        https://api.github.com/repos/lorenyeung/harness-yaml-templates/statuses/<+codebase.commitSha> \
                         -d '{"state":"pending","target_url":"<+pipeline.execution.url>","description":"Test is running","context":"harness-ci/tests"}'
   properties:
     ci:
