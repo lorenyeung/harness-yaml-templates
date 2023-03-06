@@ -1,0 +1,72 @@
+pipeline:
+  name: "CI - matrices "
+  identifier: CI_matrices
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags:
+    CI: ""
+    six: ""
+  stages:
+    - stage:
+        name: DetermineMatrix
+        identifier: DetermineMatrix
+        type: CI
+        spec:
+          cloneCodebase: false
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.sagcpk8s
+              namespace: loren-dev
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: alpine
+                    shell: Sh
+                    command: |
+                      types='"A","B","C"'
+                      echo <+stage.spec.infrastructure.spec.os> <+step.spec.image>
+                    outputVariables:
+                      - name: types
+                  failureStrategies: []
+              - step:
+                  type: Run
+                  name: output
+                  identifier: output
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: alpine
+                    shell: Sh
+                    command: echo <+steps.Run_1.output.outputVariables.types>
+    - stage:
+        name: ExecuteMatrix
+        identifier: ExecuteMatrix
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: false
+          infrastructure:
+            useFromStage: DetermineMatrix
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: alpine
+                    shell: Sh
+                    command: echo <+matrix.type2>
+        strategy:
+          matrix:
+            type2: <+pipeline.stages.DetermineMatrix.spec.execution.steps.Run_1.output.outputVariables.types>.split(',')
+  variables: []
