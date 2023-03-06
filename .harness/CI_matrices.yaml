@@ -63,7 +63,7 @@ pipeline:
                   identifier: Run_1
                   spec:
                     connectorRef: account.harnessImage
-                    image: alpine
+                    image: lorenharness/alpine-jq-yq-curl-bash
                     shell: Sh
                     command: |-
                       echo <+matrix.type2> "matrix"
@@ -85,8 +85,3 @@ pipeline:
           matrix:
             type2: <+pipeline.stages.DetermineMatrix.spec.execution.steps.Run_1.output.outputVariables.types>.split(',')
   variables: []
-  properties:
-    ci:
-      codebase:
-        connectorRef: ghrepoharnessyamltemplates
-        build: <+input>
