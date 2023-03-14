@@ -16,7 +16,7 @@ featureFlags:
         - identifier: "false"
           value: "false"
       environments:
-      - identifier: hi
+      - identifier: iterativelocalmbp
         default:
           onVariation: "false"
           offVariation: "false"
@@ -52,7 +52,7 @@ featureFlags:
         - identifier: "false"
           value: "false"
       environments:
-      - identifier: hi
+      - identifier: iterativelocalmbp
         default:
           onVariation: "true"
           offVariation: "false"
@@ -88,7 +88,7 @@ featureFlags:
         - identifier: "false"
           value: "false"
       environments:
-      - identifier: hi
+      - identifier: iterativelocalmbp
         default:
           onVariation: "true"
           offVariation: "false"
@@ -126,7 +126,7 @@ featureFlags:
         - identifier: Twenty_Day_Trial
           value: 20 Day Trial
       environments:
-      - identifier: hi
+      - identifier: iterativelocalmbp
         default:
           onVariation: Seven_Day_Trial
           offVariation: Seven_Day_Trial
