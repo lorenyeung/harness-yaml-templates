@@ -7,6 +7,6 @@ template:
       connectorRef: account.harnessImage
       image: alpine
       shell: Sh
-      command: echo "hello"
+      command: echo "hello 2"
   identifier: hello4
   versionLabel: v1
