@@ -1,7 +1,7 @@
 template:
   name: run2
   identifier: run2
-  versionLabel: v1
+  versionLabel: v2
   type: Step
   tags: {}
   spec:
