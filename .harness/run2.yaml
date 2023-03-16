@@ -1,0 +1,13 @@
+template:
+  name: run2
+  identifier: run2
+  versionLabel: v1
+  type: Step
+  tags: {}
+  spec:
+    type: Run
+    spec:
+      connectorRef: account.harnessImage
+      image: alpine
+      shell: Sh
+      command: echo "run"
