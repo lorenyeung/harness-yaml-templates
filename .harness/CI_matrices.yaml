@@ -45,9 +45,7 @@ pipeline:
                     connectorRef: account.harnessImage
                     image: alpine
                     shell: Sh
-                    command: |-
-                      echo <+steps.Run_1.output.outputVariables.types>
-                      echo <+steps>
+                    command: echo <+steps.Run_1.output.outputVariables.types>
     - stage:
         name: ExecuteMatrix
         identifier: ExecuteMatrix
