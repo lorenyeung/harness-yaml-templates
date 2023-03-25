@@ -47,7 +47,7 @@ pipeline:
                     shell: Sh
                     command: |-
                       echo <+steps.Run_1.output.outputVariables.types>
-                      echo "step" <+step>
+                      echo "step" <+step.setupId> <+step.runtimeId>
     - stage:
         name: ExecuteMatrix
         identifier: ExecuteMatrix
