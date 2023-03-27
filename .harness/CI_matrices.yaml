@@ -6,6 +6,7 @@ pipeline:
   tags:
     CI: ""
     six: ""
+    <+steps.Run_1.output.outputVariables.types>: ""
   stages:
     - stage:
         name: DetermineMatrix
@@ -51,7 +52,6 @@ pipeline:
     - stage:
         name: ExecuteMatrix
         identifier: ExecuteMatrix
-        description: ""
         type: CI
         spec:
           cloneCodebase: false
