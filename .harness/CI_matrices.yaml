@@ -85,6 +85,7 @@ pipeline:
                       set +x
                       echo <+matrix.type2> "matrix3"
                       echo <+var x=[...];for (i: [0]) { var z= 'pipeline.stages.ExecuteMatrix_'+i+'.name'; x.add(i);}; return x.toString()>
+                      echo <+var x=[...];for (i: [0]) { x.add(i);}; return x.toString()>
                       echo <+pipeline.stages.ExecuteMatrix_0.name> 
                         curl -s \
                         -X POST \
