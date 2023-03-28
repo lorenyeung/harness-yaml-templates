@@ -82,8 +82,9 @@ pipeline:
                     image: lorenharness/alpine-jq-yq-curl-bash
                     shell: Bash
                     command: |-
+                      set +x
                       echo <+matrix.type2> "matrix3"
-                      echo <+var x=[...];for (i: [0,1,2,3]) { var z= 'pipeline.stages.ExecuteMatrix_'+i+'.name; x.add(j);}; return x.toString()>
+                      echo <+var x=[...];for (i: [0,1,2]) { var z= 'pipeline.stages.ExecuteMatrix_'+i+'.name; x.add(i);}; return x.toString()>
 
                         curl -s \
                         -X POST \
