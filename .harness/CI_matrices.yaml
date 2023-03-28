@@ -49,7 +49,8 @@ pipeline:
                     command: |-
                       echo <+steps.Run_1.output.outputVariables.types>
                       echo "step" <+step.setupId> <+step.runtimeId>
-                      echo <+eventPayload>
+                      echo <+eventPayload.commits.split(',')>
+                      echo <+eventPayload.commits.messages>
     - stage:
         name: ExecuteMatrix
         identifier: ExecuteMatrix
