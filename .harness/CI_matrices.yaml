@@ -50,10 +50,11 @@ pipeline:
                       set +x
                       echo <+steps.Run_1.output.outputVariables.types>
                       echo "step" <+step.setupId> <+step.runtimeId>
-                      echo <+eventPayload.commits.message>
-                      #echo <+eventPayload.commits[]{}> # gives null
-                      echo <+eventPayload.commits[]>
-                      echo <+eventPayload.commits[].message>
+                      #echo <+eventPayload.commits.message> # null
+                      #echo <+eventPayload.commits[]{}> #  null
+                      #echo <+eventPayload.commits[]> #null
+                      #echo <+eventPayload.commits[].message> #null
+                      echo <+eventPayload.commits['0']>
                       #echo <+var x=[...];for (i: [0,1,2,3]) { var z= 'pipeline.stages.kk_'+i+'.name'; x.add(j);}; return x.toString()>
     - stage:
         name: ExecuteMatrix
