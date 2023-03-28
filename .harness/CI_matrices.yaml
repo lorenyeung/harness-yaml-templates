@@ -62,7 +62,7 @@ pipeline:
                       #echo <+eventPayload.commits[{"0"}]> #null
                       #echo <+eventPayload.commits[{.message}]> #null
                       #echo <+var x=[...];for (i: [0,1,2,3]) { var z= 'pipeline.stages.kk_'+i+'.name'; x.add(i);}; return x.toString()>
-                      echo <+var x=[...];for (i: [0,1] {var z = 'eventPayload.commits'+[i]+'; x.add(i);}; return x.toString()>
+                      echo <+var x=[...];for (i: [0,1] {var z = 'eventPayload.commits'+[i]; x.add(i);}; return x.toString()>
     - stage:
         name: ExecuteMatrix
         identifier: ExecuteMatrix
