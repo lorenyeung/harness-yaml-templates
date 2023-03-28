@@ -53,6 +53,7 @@ pipeline:
                       echo <+eventPayload.commits>
                       echo <+eventPayload.commits[]{}>
                       echo <+eventPayload.head_commit>
+                      echo <+eventPayload>
                       echo <+var x=[...];for (i: [0,1,2,3]) { var z= 'pipeline.stages.kk_'+i+'.name'; x.add(j);}; return x.toString()>
     - stage:
         name: ExecuteMatrix
