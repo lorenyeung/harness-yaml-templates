@@ -83,7 +83,7 @@ pipeline:
                     shell: Bash
                     command: |-
                       echo <+matrix.type2> "matrix3"
-                      echo <+var x=[...];for (i: [0,1,2,3]) { var z= 'pipeline.stages.DetermineMatrix.steps.Run_1_'+i+'.name; x.add(i);}; return x.toString()>
+                      echo <+var x=[...];for (i: [0,1,2,3]) { var z= 'pipeline.stages.DetermineMatrix_'+i+'.name; x.add(j);}; return x.toString()>
 
                         curl -s \
                         -X POST \
