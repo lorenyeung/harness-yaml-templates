@@ -84,8 +84,8 @@ pipeline:
                     command: |-
                       set +x
                       echo <+matrix.type2> "matrix3"
-                      echo <+var x=[...];for (i: [0,1,2]) { var z= 'pipeline.stages.ExecuteMatrix_'+i'; x.add(i);}; return x.toString()>
-
+                      echo <+var x=[...];for (i: [0,1,2]) { var z= 'pipeline.stages.ExecuteMatrix_'+i; x.add(i);}; return x.toString()>
+                      echo <+pipeline.stages.ExecuteMatrix_0.name> <+pipeline.stages.ExecuteMatrix_0>
                         curl -s \
                         -X POST \
                         -H "Authorization: Bearer <+secrets.getValue('account.ghpatsecretacc')>" \
