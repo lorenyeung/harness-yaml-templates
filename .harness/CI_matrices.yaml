@@ -47,11 +47,12 @@ pipeline:
                     image: alpine
                     shell: Sh
                     command: |-
+                      set +x
                       echo <+steps.Run_1.output.outputVariables.types>
                       echo "step" <+step.setupId> <+step.runtimeId>
                       echo <+eventPayload.commits.split(',')>
                       echo <+eventPayload.commits.split(':')[]>
-                      echo <+eventPayload.commits>
+                      echo <+eventPayload.commits[]>
     - stage:
         name: ExecuteMatrix
         identifier: ExecuteMatrix
