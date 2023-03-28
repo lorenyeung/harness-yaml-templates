@@ -54,14 +54,15 @@ pipeline:
                       #echo <+eventPayload.commits[]{}> #  null
                       #echo <+eventPayload.commits[]> #null
                       #echo <+eventPayload.commits[].message> #null
-                      echo <+eventPayload.commits['0']>
-                      echo <+eventPayload.commits[0]>
-                      echo <+eventPayload.commits["0"]>
-                      echo <+eventPayload.commits[{'0'}]>
-                      echo <+eventPayload.commits[{0}]>
-                      echo <+eventPayload.commits[{"0"}]>
-                      echo <+eventPayload.commits[{.message}]>
-                      #echo <+var x=[...];for (i: [0,1,2,3]) { var z= 'pipeline.stages.kk_'+i+'.name'; x.add(j);}; return x.toString()>
+                      #echo <+eventPayload.commits['0']> #null
+                      #echo <+eventPayload.commits[0]> # this one
+                      #echo <+eventPayload.commits["0"]> #null
+                      #echo <+eventPayload.commits[{'0'}]> #null
+                      #echo <+eventPayload.commits[{0}]> #null
+                      #echo <+eventPayload.commits[{"0"}]> #null
+                      #echo <+eventPayload.commits[{.message}]> #null
+                      #echo <+var x=[...];for (i: [0,1,2,3]) { var z= 'pipeline.stages.kk_'+i+'.name'; x.add(i);}; return x.toString()>
+                      echo <+var x=[...];for (i: [0,1] {var z = 'eventPayload.commits'+[i]+'; x.add(i);}; return x.toString()>
     - stage:
         name: ExecuteMatrix
         identifier: ExecuteMatrix
