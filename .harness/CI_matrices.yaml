@@ -84,6 +84,7 @@ pipeline:
                     command: |-
                       set +x
                       echo <+matrix.type2> "matrix3"
+                      echo <step.status>
                       echo <+ var x='';for (i: [0,1,2]) { var x= 'pipeline.stages.ExecuteMatrix_'+i+'.name'; x.add(i);}; return x.toString()>
                       echo <+ var x=["0","1"];for (i: [0,1]) { x.add(i); system.print(i);}; return x.toString()>
                       echo <+pipeline.stages.ExecuteMatrix_0.name> 
