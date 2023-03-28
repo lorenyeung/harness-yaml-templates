@@ -50,9 +50,9 @@ pipeline:
                       set +x
                       echo <+steps.Run_1.output.outputVariables.types>
                       echo "step" <+step.setupId> <+step.runtimeId>
-                      echo <+eventPayload.commits.split(',')>
-                      echo <+eventPayload.commits.split(':')[]>
-                      echo <+eventPayload.commits[]>
+                      echo <+var x=[...];for (i: [0,1,2,3]) { var z= 'pipeline.stages.kk_'+i+'.name'; x.add(j);}; return x.toString()>
+                      echo <+eventPayload.[]commits>
+                      echo <+eventPayload.commits['0']>
     - stage:
         name: ExecuteMatrix
         identifier: ExecuteMatrix
