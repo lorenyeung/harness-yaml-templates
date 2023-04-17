@@ -1,0 +1,30 @@
+pipeline:
+  name: CI - deleting templates
+  identifier: CI_deleting_templates
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: ci
+        identifier: ci
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: false
+          execution:
+            steps:
+              - step:
+                  name: Run_1
+                  identifier: Run_1
+                  template:
+                    templateRef: hello
+                    versionLabel: v1
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.sagcpk8s
+              namespace: loren-dev
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux

@@ -16,12 +16,22 @@ featureFlags:
         - identifier: "false"
           value: "false"
       environments:
+      - identifier: iterativelocalmbp
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
       - identifier: prod
         default:
           onVariation: "false"
           offVariation: "false"
         state: "off"
       - identifier: localmbp
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: sshdev
         default:
           onVariation: "false"
           offVariation: "false"
@@ -47,12 +57,22 @@ featureFlags:
         - identifier: "false"
           value: "false"
       environments:
+      - identifier: iterativelocalmbp
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
       - identifier: prod
         default:
           onVariation: "true"
           offVariation: "false"
         state: "off"
       - identifier: localmbp
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: sshdev
         default:
           onVariation: "true"
           offVariation: "false"
@@ -78,12 +98,22 @@ featureFlags:
         - identifier: "false"
           value: "false"
       environments:
+      - identifier: iterativelocalmbp
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
       - identifier: prod
         default:
           onVariation: "true"
           offVariation: "false"
         state: "off"
       - identifier: localmbp
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: sshdev
         default:
           onVariation: "true"
           offVariation: "false"
@@ -111,12 +141,22 @@ featureFlags:
         - identifier: Twenty_Day_Trial
           value: 20 Day Trial
       environments:
+      - identifier: iterativelocalmbp
+        default:
+          onVariation: Seven_Day_Trial
+          offVariation: Seven_Day_Trial
+        state: "off"
       - identifier: prod
         default:
           onVariation: Seven_Day_Trial
           offVariation: Seven_Day_Trial
         state: "off"
       - identifier: localmbp
+        default:
+          onVariation: Seven_Day_Trial
+          offVariation: Seven_Day_Trial
+        state: "off"
+      - identifier: sshdev
         default:
           onVariation: Seven_Day_Trial
           offVariation: Seven_Day_Trial
