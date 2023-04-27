@@ -36,6 +36,11 @@ featureFlags:
           onVariation: "false"
           offVariation: "false"
         state: "off"
+      - identifier: Infrastructure
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
       - identifier: dev
         default:
           onVariation: "false"
@@ -73,6 +78,11 @@ featureFlags:
           offVariation: "false"
         state: "off"
       - identifier: sshdev
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: Infrastructure
         default:
           onVariation: "true"
           offVariation: "false"
@@ -118,6 +128,11 @@ featureFlags:
           onVariation: "true"
           offVariation: "false"
         state: "off"
+      - identifier: Infrastructure
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
       - identifier: dev
         default:
           onVariation: "true"
@@ -157,6 +172,11 @@ featureFlags:
           offVariation: Seven_Day_Trial
         state: "off"
       - identifier: sshdev
+        default:
+          onVariation: Seven_Day_Trial
+          offVariation: Seven_Day_Trial
+        state: "off"
+      - identifier: Infrastructure
         default:
           onVariation: Seven_Day_Trial
           offVariation: Seven_Day_Trial
