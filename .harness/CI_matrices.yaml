@@ -107,6 +107,12 @@ pipeline:
                         -d '{"state":"success","target_url":"<+pipeline.execution.url>","description":"Is success <+step.identifier>","context":"harness-ci/tests"}'
 
                         echo <+secret.getValue("fake_secret")>
+              - step:
+                  name: test
+                  identifier: test
+                  template:
+                    templateRef: account.blah
+                    versionLabel: "1"
         strategy:
           matrix:
             type2: <+pipeline.stages.DetermineMatrix.spec.execution.steps.Run_1.output.outputVariables.types>.split(',')
