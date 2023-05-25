@@ -4,8 +4,8 @@ pipeline:
   projectIdentifier: technical_exercise
   orgIdentifier: default
   tags:
+    "6": ""
     CI: ""
-    six: ""
     <+steps.Run_1.output.outputVariables.types>: ""
   stages:
     - stage:
@@ -108,11 +108,14 @@ pipeline:
 
                         echo <+secret.getValue("fake_secret")>
               - step:
-                  name: test
-                  identifier: test
-                  template:
-                    templateRef: account.blah
-                    versionLabel: "1"
+                  type: Run
+                  name: Run_2
+                  identifier: Run_2
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: alpine
+                    shell: Sh
+                    command: echo <+pipeline.stages["ExecuteMatrix"+ <+strategy.iteration>].status>
         strategy:
           matrix:
             type2: <+pipeline.stages.DetermineMatrix.spec.execution.steps.Run_1.output.outputVariables.types>.split(',')
