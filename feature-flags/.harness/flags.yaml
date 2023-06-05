@@ -248,6 +248,6 @@ featureFlags:
         targetRules:
         - targets:
           - identifier: loren.yeung@harness.io
-          variation: Fourteen_Day_Trial
+          variation: Twenty_Day_Trial
   projectIdentifier: technical_exercise
   orgIdentifier: default
