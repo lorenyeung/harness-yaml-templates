@@ -139,6 +139,52 @@ featureFlags:
           offVariation: "false"
         state: "off"
   - flag:
+      name: test
+      identifier: test
+      description: ""
+      permanent: false
+      spec:
+        type: boolean
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        variations:
+        - identifier: "true"
+          value: "true"
+        - identifier: "false"
+          value: "false"
+      environments:
+      - identifier: iterativelocalmbp
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: prod
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: localmbp
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: sshdev
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: stage
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: dev
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+  - flag:
       name: Trial Length
       identifier: Trial_Length
       description: this is another description
