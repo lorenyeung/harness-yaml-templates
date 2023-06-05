@@ -235,7 +235,7 @@ featureFlags:
         default:
           onVariation: Seven_Day_Trial
           offVariation: Seven_Day_Trial
-        state: "off"
+        state: "on"
         rules:
         - priority: 0
           serve:
