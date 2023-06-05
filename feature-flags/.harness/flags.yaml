@@ -241,5 +241,9 @@ featureFlags:
             op: segmentMatch
             values:
             - QA_Testers
+        targetRules:
+        - targets:
+          - identifier: loren.yeung@harness.io
+          variation: Seven_Day_Trial
   projectIdentifier: technical_exercise
   orgIdentifier: default
