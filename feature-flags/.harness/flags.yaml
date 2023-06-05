@@ -49,7 +49,7 @@ featureFlags:
         targetRules:
         - targets:
           - identifier: loren.yeung@harness.io
-          variation: "false"
+          variation: "true"
   - flag:
       name: git-test
       identifier: gittest
