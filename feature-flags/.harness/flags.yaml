@@ -137,7 +137,7 @@ featureFlags:
         default:
           onVariation: "true"
           offVariation: "false"
-        state: "on"
+        state: "off"
   - flag:
       name: Trial Length
       identifier: Trial_Length
