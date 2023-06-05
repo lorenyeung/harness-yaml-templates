@@ -233,7 +233,7 @@ featureFlags:
         state: "off"
       - identifier: dev
         default:
-          onVariation: Seven_Day_Trial
+          onVariation: Fourteen_Day_Trial
           offVariation: Seven_Day_Trial
         state: "on"
         rules:
