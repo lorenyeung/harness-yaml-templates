@@ -46,6 +46,10 @@ featureFlags:
           onVariation: "false"
           offVariation: "false"
         state: "off"
+        targetRules:
+        - targets:
+          - identifier: loren.yeung@harness.io
+          variation: "false"
   - flag:
       name: git-test
       identifier: gittest
