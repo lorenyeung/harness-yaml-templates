@@ -1,2 +1,2 @@
-image: <+artifact.image>
 namespace: <+infra.namespace>
+image: <+artifact.image>
