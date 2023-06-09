@@ -21,12 +21,6 @@ pipeline:
               serviceDefinition:
                 type: Kubernetes
                 spec:
-                  manifests:
-                    - manifest:
-                        identifier: nginx_manifest
-                        type: HelmChart
-                        spec:
-                          chartVersion: <+input>
                   artifacts:
                     primary:
                       primaryArtifactRef: <+input>
