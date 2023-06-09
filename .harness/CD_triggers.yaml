@@ -4,9 +4,9 @@ pipeline:
   projectIdentifier: technical_exercise
   orgIdentifier: default
   tags:
+    "3": ""
+    "6": ""
     cd: ""
-    three: ""
-    six: ""
   stages:
     - stage:
         name: cd
