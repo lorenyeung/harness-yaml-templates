@@ -56,6 +56,57 @@ featureFlags:
           - identifier: loren.yeung@harness.io
           variation: "true"
   - flag:
+      name: FF - myfirstflag
+      identifier: FF_myfirstflag
+      description: ""
+      permanent: false
+      spec:
+        type: boolean
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        variations:
+        - identifier: "true"
+          value: "true"
+        - identifier: "false"
+          value: "false"
+      environments:
+      - identifier: iterativelocalmbp
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: prod
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: localmbp
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: sshdev
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: stage
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: engineeringdev
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: dev
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+  - flag:
       name: git-test
       identifier: gittest
       description: ""
