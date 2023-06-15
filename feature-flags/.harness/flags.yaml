@@ -31,6 +31,11 @@ featureFlags:
           onVariation: "false"
           offVariation: "false"
         state: "off"
+      - identifier: testenv
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
       - identifier: sshdev
         default:
           onVariation: "false"
@@ -86,6 +91,11 @@ featureFlags:
           onVariation: "true"
           offVariation: "false"
         state: "off"
+      - identifier: testenv
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
       - identifier: sshdev
         default:
           onVariation: "true"
@@ -133,6 +143,11 @@ featureFlags:
           offVariation: "false"
         state: "off"
       - identifier: localmbp
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: testenv
         default:
           onVariation: "true"
           offVariation: "false"
@@ -188,6 +203,11 @@ featureFlags:
           onVariation: "true"
           offVariation: "false"
         state: "off"
+      - identifier: testenv
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
       - identifier: sshdev
         default:
           onVariation: "true"
@@ -235,6 +255,11 @@ featureFlags:
           offVariation: "false"
         state: "off"
       - identifier: localmbp
+        default:
+          onVariation: "true"
+          offVariation: "false"
+        state: "off"
+      - identifier: testenv
         default:
           onVariation: "true"
           offVariation: "false"
@@ -288,6 +313,11 @@ featureFlags:
           offVariation: Seven_Day_Trial
         state: "off"
       - identifier: localmbp
+        default:
+          onVariation: Seven_Day_Trial
+          offVariation: Seven_Day_Trial
+        state: "off"
+      - identifier: testenv
         default:
           onVariation: Seven_Day_Trial
           offVariation: Seven_Day_Trial
