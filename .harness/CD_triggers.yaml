@@ -30,6 +30,11 @@ pipeline:
             deployToAll: false
             infrastructureDefinitions:
               - identifier: colimak8sinfra
+                inputs:
+                  identifier: colimak8sinfra
+                  type: KubernetesDirect
+                  spec:
+                    namespace: <+input>              
           execution:
             steps:
               - step:
