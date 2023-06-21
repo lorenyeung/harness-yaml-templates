@@ -29,7 +29,7 @@ pipeline:
             environmentRef: dev
             deployToAll: false
             infrastructureDefinitions:
-              - identifier: gcpinfra
+              - identifier: colimainfra
           execution:
             steps:
               - step:
