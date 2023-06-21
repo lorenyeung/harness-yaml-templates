@@ -29,7 +29,7 @@ pipeline:
             environmentRef: dev
             deployToAll: false
             infrastructureDefinitions:
-              - identifier: colimainfra
+              - identifier: colimak8sinfra
           execution:
             steps:
               - step:
