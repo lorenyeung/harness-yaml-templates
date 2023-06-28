@@ -37,7 +37,8 @@ pipeline:
                       echo <+stage.spec.infrastructure.spec.os> <+step.spec.image>
                     outputVariables:
                       - name: types
-                  failureStrategies: []
+                    envVariables:
+                      test: <+input>
               - step:
                   type: Run
                   name: output
