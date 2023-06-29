@@ -1,0 +1,33 @@
+pipeline:
+  name: ci - variable concatenation
+  identifier: ci_variable_concatenation
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags: {}
+  stages:
+    - stage:
+        name: ci
+        identifier: ci
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: false
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.colimak8s
+              namespace: loren-dev
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: Run_1
+                  identifier: Run_1
+                  spec:
+                    connectorRef: account.lorenharnessdockerhub
+                    image: alpine
+                    shell: Sh
+                    command: echo <+pipeline.stages>
