@@ -29,7 +29,8 @@ pipeline:
                     connectorRef: account.lorenharnessdockerhub
                     image: alpine
                     shell: Sh
-                    command: echo <+pipeline.stages>
+                    command: |
+                      echo <+trigger.branch>
   properties:
     ci:
       codebase:
