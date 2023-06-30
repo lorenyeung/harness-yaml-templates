@@ -30,6 +30,9 @@ pipeline:
           runtime:
             type: Cloud
             spec: {}
+        when:
+          pipelineStatus: Success
+          condition: <+trigger.branch> == "main"
   properties:
     ci:
       codebase:
