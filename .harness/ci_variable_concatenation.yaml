@@ -33,6 +33,6 @@ pipeline:
   properties:
     ci:
       codebase:
-        connectorRef: account.ghconnectoracc
+        connectorRef: account.ghconnectorcloud
         repoName: harness-yaml-templates
         build: <+input>
