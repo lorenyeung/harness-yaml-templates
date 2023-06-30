@@ -23,7 +23,7 @@ pipeline:
                     shell: Sh
                     command: |
                       echo <+trigger.branch>
-                      echo <+trigger.branch>
+                      echo <+pipeline.stages.<pipeline.variables.stagename>.status>
           platform:
             os: Linux
             arch: Amd64
@@ -39,3 +39,9 @@ pipeline:
         connectorRef: account.ghconnectorcloud
         repoName: harness-yaml-templates
         build: <+input>
+  variables:
+    - name: stagename
+      type: String
+      description: ""
+      required: false
+      value: ci
