@@ -32,7 +32,7 @@ pipeline:
             spec: {}
         when:
           pipelineStatus: Success
-          condition: <+trigger.branch> == "main"
+          condition: <+trigger.branch> != "main"
   properties:
     ci:
       codebase:
