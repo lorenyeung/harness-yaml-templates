@@ -31,6 +31,7 @@ pipeline:
                     shell: Sh
                     command: |
                       echo <+trigger.branch>
+                      echo <+trigger.branch>
   properties:
     ci:
       codebase:
