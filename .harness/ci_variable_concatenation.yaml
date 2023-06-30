@@ -11,14 +11,6 @@ pipeline:
         type: CI
         spec:
           cloneCodebase: true
-          infrastructure:
-            type: KubernetesDirect
-            spec:
-              connectorRef: account.colimak8s
-              namespace: loren-dev
-              automountServiceAccountToken: true
-              nodeSelector: {}
-              os: Linux
           execution:
             steps:
               - step:
@@ -26,12 +18,18 @@ pipeline:
                   name: Run_1
                   identifier: Run_1
                   spec:
-                    connectorRef: account.lorenharnessdockerhub
+                    connectorRef: account.lorenharnessdockerhubcloud
                     image: alpine
                     shell: Sh
                     command: |
                       echo <+trigger.branch>
                       echo <+trigger.branch>
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
   properties:
     ci:
       codebase:
