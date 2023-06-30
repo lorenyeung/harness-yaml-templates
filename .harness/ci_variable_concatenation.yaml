@@ -23,7 +23,7 @@ pipeline:
                     shell: Sh
                     command: |
                       echo <+trigger.branch>
-                      echo <+pipeline.stages.<pipeline.variables.stagename>.status>
+                      echo <+pipeline.stages.<+pipeline.variables.stagename>.status>
           platform:
             os: Linux
             arch: Amd64
