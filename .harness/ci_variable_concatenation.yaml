@@ -3,7 +3,9 @@ pipeline:
   identifier: ci_variable_concatenation
   projectIdentifier: technical_exercise
   orgIdentifier: default
-  tags: {}
+  tags:
+    "6": ""
+    ci: ""
   stages:
     - stage:
         name: ci
