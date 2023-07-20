@@ -1,6 +1,62 @@
 featureFlags:
   flags:
   - flag:
+      name: boolean
+      identifier: boolean
+      description: ""
+      permanent: false
+      spec:
+        type: boolean
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        variations:
+        - identifier: "true"
+          value: "true"
+        - identifier: "false"
+          value: "false"
+      environments:
+      - identifier: iterativelocalmbp
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: prod
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: localmbp
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: testenv
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: sshdev
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: stage
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: engineeringdev
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: dev
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+  - flag:
       name: Builds Module
       identifier: Builds_Module
       description: this is a description
