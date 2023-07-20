@@ -357,8 +357,6 @@ featureFlags:
           value: 14 Day Trial
         - identifier: Twenty_Day_Trial
           value: 20 Day Trial
-        - identifier: variation_1
-          value: v1
       environments:
       - identifier: iterativelocalmbp
         default:
