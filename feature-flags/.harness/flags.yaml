@@ -341,7 +341,7 @@ featureFlags:
           offVariation: "false"
         state: "on"
   - flag:
-      name: Trial Length
+      name: Trial Length test
       identifier: Trial_Length
       description: this is another description
       permanent: false
