@@ -1,0 +1,46 @@
+pipeline:
+  name: CI - pipeline chaining
+  identifier: pipeline_chaining
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags:
+    "3": ""
+    ci: ""
+  stages:
+    - stage:
+        name: echo
+        identifier: echo
+        type: CI
+        spec:
+          cloneCodebase: false
+          execution:
+            steps:
+              - step:
+                  type: Run
+                  name: echo
+                  identifier: echo
+                  spec:
+                    connectorRef: account.lorennonprodazure
+                    image: loren/alpine-jq-curl
+                    shell: Bash
+                    command: |-
+                      echo "this chained pipeline worked"
+                      echo "input:"<+pipeline.variables.input>
+                      myoutput="<+pipeline.variables.input>+output"
+                    outputVariables:
+                      - name: myoutput
+                    imagePullPolicy: IfNotPresent
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: <+input>
+              namespace: loren-dev
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+  description: call this pipeline from another one
+  variables:
+    - name: input
+      type: String
+      description: ""
+      value: <+input>
