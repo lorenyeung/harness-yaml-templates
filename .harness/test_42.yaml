@@ -1,0 +1,16 @@
+inputSet:
+  identifier: "test_42"
+  name: "test_42"
+  orgIdentifier: "default"
+  projectIdentifier: "technical_exercise"
+  pipeline:
+    identifier: "pipeline_chaining"
+    stages:
+    - stage:
+        identifier: "echo"
+        type: "CI"
+        spec:
+          infrastructure:
+            type: "KubernetesDirect"
+            spec:
+              connectorRef: "blah"
