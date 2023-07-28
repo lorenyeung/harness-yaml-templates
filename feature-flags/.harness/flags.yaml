@@ -55,7 +55,7 @@ featureFlags:
         default:
           onVariation: "false"
           offVariation: "false"
-        state: "on"
+        state: "off"
   - flag:
       name: Builds Module
       identifier: Builds_Module
