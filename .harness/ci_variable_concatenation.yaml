@@ -23,7 +23,7 @@ pipeline:
                     connectorRef: account.lorenharnessdockerhubcloud
                     image: alpine
                     shell: Sh
-                    command: |
+                    command: |-
                       echo <+trigger.branch>
                       echo <+pipeline.stages.<+pipeline.variables.stagename>.status>
           platform:
@@ -34,7 +34,32 @@ pipeline:
             spec: {}
         when:
           pipelineStatus: Success
-          condition: <+trigger.branch> == "main"
+    - stage:
+        name: approval
+        identifier: approval
+        description: ""
+        type: Approval
+        spec:
+          execution:
+            steps:
+              - step:
+                  name: ap
+                  identifier: ap
+                  type: HarnessApproval
+                  timeout: 1d
+                  spec:
+                    approvalMessage: |-
+                      Please review the following information
+                      and approve the pipeline progression
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                      userGroups:
+                        - account.admin
+                    isAutoRejectEnabled: false
+                    approverInputs: []
+        tags: {}
   properties:
     ci:
       codebase:
