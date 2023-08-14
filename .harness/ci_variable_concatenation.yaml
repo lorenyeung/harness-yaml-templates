@@ -6,6 +6,7 @@ pipeline:
   tags:
     "6": ""
     ci: ""
+    hosted: ""
   stages:
     - stage:
         name: ci
