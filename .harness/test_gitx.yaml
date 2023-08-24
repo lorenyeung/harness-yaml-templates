@@ -26,4 +26,4 @@ pipeline:
                   identifier: Run_1
                   spec:
                     shell: Sh
-                    command: echo
+                    command: echo <+trigger.payload.head_commit.message>
