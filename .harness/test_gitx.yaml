@@ -3,7 +3,11 @@ pipeline:
   identifier: test_gitx
   projectIdentifier: technical_exercise
   orgIdentifier: default
-  tags: {}
+  tags:
+    "14": ""
+    ci: ""
+    triggers: ""
+    hosted: ""
   stages:
     - stage:
         name: test
