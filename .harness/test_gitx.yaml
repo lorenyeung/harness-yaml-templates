@@ -26,4 +26,12 @@ pipeline:
                   identifier: Run_1
                   spec:
                     shell: Sh
-                    command: echo <+trigger.payload.head_commit.message>
+                    command: |-
+                      echo <+trigger.payload.head_commit.message>
+                      echo "var:" <+pipeline.variables.branch>
+  variables:
+    - name: branch
+      type: String
+      description: ""
+      required: false
+      value: <+input>
