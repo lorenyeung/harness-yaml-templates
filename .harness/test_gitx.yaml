@@ -3,7 +3,11 @@ pipeline:
   identifier: test_gitx
   projectIdentifier: technical_exercise
   orgIdentifier: default
-  tags: {}
+  tags:
+    "14": ""
+    ci: ""
+    triggers: ""
+    hosted: ""
   stages:
     - stage:
         name: test
@@ -26,4 +30,9 @@ pipeline:
                   identifier: Run_1
                   spec:
                     shell: Sh
-                    command: echo <+trigger.payload.head_commit.message>
+                    command: |-
+                      echo "github:" <+trigger.payload.head_commit.message>
+                      echo "bitbucket:" <+trigger.payload.push.changes[0].'new'.target.message>
+
+                      echo <+trigger.payload.changes[0].ref.displayId>
+                      echo <+trigger.payload>
