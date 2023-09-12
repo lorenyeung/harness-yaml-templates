@@ -73,3 +73,8 @@ pipeline:
       description: ""
       required: false
       value: ci
+    - name: newvar
+      type: String
+      description: ""
+      required: false
+      value: <+input>
