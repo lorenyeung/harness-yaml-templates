@@ -16,21 +16,29 @@ template:
         spec: {}
       execution:
         steps:
-          - step:
-              name: step_aws_account
-              identifier: step_aws_account
+          - stepGroup:
+              name: stepgroup
+              identifier: stepgroup
               template:
-                templateRef: account.step_aws_account
+                templateRef: account.stepgroup_aws_account
                 versionLabel: v1
                 templateInputs:
-                  type: AWSECR
-                  spec:
-                    auth:
-                      access_token: <+input>
-                      access_id: <+input>
-                      region: <+input>
-                    image:
-                      type: aws_ecr
-                      name: <+input>
-                      region: <+input>
-                      tag: <+input>
+                  steps:
+                    - stepGroup:
+                        identifier: stepgroup
+                        steps:
+                          - step:
+                              identifier: step_aws_account
+                              template:
+                                templateInputs:
+                                  type: AWSECR
+                                  spec:
+                                    auth:
+                                      access_token: <+input>
+                                      access_id: <+input>
+                                      region: <+input>
+                                    image:
+                                      type: aws_ecr
+                                      name: <+input>
+                                      region: <+input>
+                                      tag: <+input>
