@@ -1,0 +1,32 @@
+template:
+  name: stepgroup_aws_account
+  identifier: stepgroup_aws_account
+  versionLabel: v1
+  type: StepGroup
+  tags: {}
+  spec:
+    stageType: CI
+    steps:
+      - stepGroup:
+          name: stepgroup
+          identifier: stepgroup
+          steps:
+            - step:
+                name: step_aws_account
+                identifier: step_aws_account
+                template:
+                  templateRef: account.step_aws_account
+                  versionLabel: v1
+                  gitBranch: main
+                  templateInputs:
+                    type: AWSECR
+                    spec:
+                      auth:
+                        access_token: <+input>
+                        access_id: <+input>
+                        region: <+input>
+                      image:
+                        type: aws_ecr
+                        name: <+input>
+                        region: <+input>
+                        tag: <+input>
