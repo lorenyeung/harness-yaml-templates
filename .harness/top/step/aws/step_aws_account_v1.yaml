@@ -1,7 +1,7 @@
 template:
   name: step_aws_account
   identifier: step_aws_account
-  versionLabel: v1
+  versionLabel: v2
   type: Step
   tags: {}
   spec:
