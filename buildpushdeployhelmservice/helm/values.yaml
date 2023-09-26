@@ -1,2 +1,4 @@
 namespace: <+infra.namespace>
-image: <+artifact.image>
+image: 
+  repository: <+artifact.image>
+  tag: <+artifact.tag>
