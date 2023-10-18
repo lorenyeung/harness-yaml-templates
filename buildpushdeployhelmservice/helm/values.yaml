@@ -4,4 +4,4 @@ image:
   tag: <+artifact.tag>
 metadata:
   labels:
-    harness.io/release: {{ .Release.Name }}
+    harness.io/release: "{{ .Release.Name }}"
