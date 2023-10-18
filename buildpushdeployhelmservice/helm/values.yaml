@@ -5,3 +5,5 @@ image:
 metadata:
   labels:
     harness.io/release: "{{ .Release.Name }}"
+commonLabels:
+  harness.io/release: "{{ .Release.Name }}"
