@@ -7,3 +7,4 @@ metadata:
     harness.io/release: "{{ .Release.Name }}"
 commonLabels:
   harness.io/release: "{{ .Release.Name }}"
+  release: "{{ .Release.Name }}"
