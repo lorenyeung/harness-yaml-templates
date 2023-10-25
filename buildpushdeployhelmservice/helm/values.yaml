@@ -2,9 +2,12 @@ namespace: <+infra.namespace>
 image: 
   repository: <+artifact.imagePath>
   tag: <+artifact.tag>
-metadata:
-  labels:
-    harness.io/release: "{{ .Release.Name }}"
 commonLabels:
-  harness.io/release: "{{ .Release.Name }}"
+  harness.io/release-name: "{{ .Release.Name }}"
   release: "{{ .Release.Name }}"
+podLabels:
+  harness.io/release-name: "{{ .Release.Name }}"
+  release: "{{ .Release.Name }}"
+extraMatchLabels:
+  app.harness.io/release-name: "{{ .Release.Name }}"
+  release: "{{ .Release.Name }}"  
