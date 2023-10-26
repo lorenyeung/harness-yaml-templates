@@ -3,11 +3,11 @@ image:
   repository: <+artifact.imagePath>
   tag: <+artifact.tag>
 commonLabels:
-  harness.io/release-name: "{{ .Release.Name }}"
+  harness.io/release: "{{ .Release.Name }}"
   release: "{{ .Release.Name }}"
 podLabels:
-  harness.io/release-name: "{{ .Release.Name }}"
+  harness.io/release: "{{ .Release.Name }}"
   release: "{{ .Release.Name }}"
 extraMatchLabels:
-  app.harness.io/release-name: "{{ .Release.Name }}"
+  app.harness.io/release: "{{ .Release.Name }}"
   release: "{{ .Release.Name }}"  
