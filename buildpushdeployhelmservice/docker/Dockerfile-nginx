@@ -1,7 +1,7 @@
 FROM bitnami/nginx:latest
 
 RUN apt-get clean
-
+ADD junit.xml /junit.xml
 EXPOSE 8080 8443
 
 WORKDIR /app
