@@ -5,6 +5,7 @@ ADD junit.xml /junit.xml
 EXPOSE 8080 8443
 
 WORKDIR /app
+ADD junit.xml /app/junit.xml
 USER 1001
 ENTRYPOINT [ "/opt/bitnami/scripts/nginx/entrypoint.sh" ]
 CMD [ "/opt/bitnami/scripts/nginx/run.sh" ]
