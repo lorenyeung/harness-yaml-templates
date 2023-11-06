@@ -1,0 +1,14 @@
+pipeline:
+  name: testtest
+  identifier: testtest
+  template:
+    templateRef: cibranchtemplate
+    versionLabel: v1
+    templateInputs:
+      properties:
+        ci:
+          codebase:
+            build: <+input>
+  tags: {}
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
