@@ -1,7 +1,8 @@
 pipeline:
-  name: testtest
+  name: reconcile - gitsync
   identifier: testtest
-  tags: {}
+  tags:
+    "22": ""
   projectIdentifier: technical_exercise
   orgIdentifier: default
   stages:
