@@ -11,3 +11,9 @@ pipeline:
         template:
           templateRef: account.example_template
           versionLabel: v1
+          templateInputs:
+            type: Custom
+            variables:
+              - name: newvar
+                type: String
+                value: <+input>
