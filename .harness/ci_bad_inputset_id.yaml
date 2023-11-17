@@ -1,0 +1,31 @@
+pipeline:
+  name: ci - bad inputset id
+  identifier: ci_bad_inputset_id
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags:
+    "6": ""
+  stages:
+    - stage:
+        name: bah
+        identifier: bah
+        description: ""
+        type: Custom
+        spec:
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    onDelegate: true
+                    source:
+                      type: Inline
+                      spec:
+                        script: <+input>
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+        tags: {}
