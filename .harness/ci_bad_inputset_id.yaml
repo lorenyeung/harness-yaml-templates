@@ -7,7 +7,7 @@ pipeline:
     "6": ""
   stages:
     - stage:
-        name: bah
+        name: bahtwo
         identifier: bah
         description: ""
         type: Custom
