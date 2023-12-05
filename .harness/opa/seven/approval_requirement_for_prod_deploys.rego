@@ -1,8 +1,5 @@
 package pipeline
 
-import future.keywords.every
-default template_exists = false
-
 #deploy stage default template ids
 default template_ds_step_id = "account.prod_approval"
 default template_ds_step_version = "v1"
@@ -15,7 +12,7 @@ default template_as_stepgroup_version = "v1"
 default template_as_stage_id = "account.prod_approval_stage"
 default template_as_stage_version = "v1"
 
-default exempt_orgs_projects = [{"org","project"},{"org2","project2"}]
+#default exempt_orgs_projects = [{"org","project"},{"org2","project2"}]
 
 ######################### APPROVAL STAGE OPA #########################
 # 1a. Check if first step has ANY templateRef in approval stage - complete
