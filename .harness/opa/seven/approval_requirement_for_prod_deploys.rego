@@ -8,10 +8,11 @@ default template_ds_step_id = "account.prod_approval"
 
 #approval stage default template ids
 default template_as_step_id = "account.approval_step_for_approval_stage"
+default template_as_stepgroup_id = "account.approval_stepgroup"
 default template_as_stage_id = "account.prod_approval_stage"
 
 ######################### APPROVAL STAGE OPA #########################
-# Check if first step has ANY templateRef in approval stage - complete
+# 1a. Check if first step has ANY templateRef in approval stage - complete
 deny[msg] {
   # if not using global stage template
   not contains_approval_stage_template(input.pipeline.stages,template_as_stage_id)
@@ -23,7 +24,7 @@ deny[msg] {
   msg := sprintf("Approval stage '%s' does not have template approval '%s' as first step", [input.pipeline.stages[i].stage.name,template_as_step_id])
 }
 
-# Check if first step has CORRECT templateRef in approval stage - complete
+# 1b. Check if first step has CORRECT templateRef in approval stage - complete
 deny[msg] {
   not contains_approval_stage_template(input.pipeline.stages,template_as_stage_id)
   input.pipeline.stages[i].stage.type == "Approval"
@@ -32,7 +33,7 @@ deny[msg] {
   msg := sprintf("Approval stage '%s' has incorrect first step template '%s', should be '%s'", [input.pipeline.stages[i].stage.name,input.pipeline.stages[i].stage.spec.execution.steps[0].step.template.templateRef, template_as_step_id])
 }
 
-# Check if first stepgroup has ANY templateRef in deploy stage - complete
+# 2a. Check if first stepgroup has ANY templateRef in deploy stage - complete
 deny[msg] {
   not contains_approval_stage_template(input.pipeline.stages,template_as_stage_id)
   input.pipeline.stages[i].stage.type == "Approval"
@@ -41,14 +42,36 @@ deny[msg] {
   msg := sprintf("Approval stage '%s' does not have template approval '%s' in first stepgroup", [input.pipeline.stages[i].stage.name,template_as_step_id])
 }
 
-# Check if first stepgroup has CORRECT templateRef in deploy stage - complete
+# 2b. Check if first stepgroup has CORRECT templateRef in deploy stage - complete
 deny[msg] {
   not contains_approval_stage_template(input.pipeline.stages,template_as_stage_id)
   input.pipeline.stages[i].stage.type == "Approval"
   has_key(input.pipeline.stages[i].stage.spec.execution.steps[0],"stepGroup")
+  # and is not using template approval stepgroup
+  not has_key(input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup,"template")
   has_key(input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[0].step,"template")
   input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[0].step.template.templateRef != template_as_step_id
-  msg := sprintf("Approval stage '%s' has incorrect template in first stepgroup step '%s', should be '%s'", [input.pipeline.stages[i].stage.name,input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[_].step.template.templateRef,template_as_step_id])
+  msg := sprintf("Approval stage '%s' has incorrect first stepgroup template in first stepgroup step '%s', should be '%s'", [input.pipeline.stages[i].stage.name,input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[_].step.template.templateRef,template_as_step_id])
+}
+
+# 3a. OPTIONAL: Check if first stepgroup template has ANY templateRef in deploy stage - complete
+# commented out as stepgroup may not have to be a template
+#deny[msg] {
+#  not contains_approval_stage_template(input.pipeline.stages,template_as_stage_id)
+#  input.pipeline.stages[i].stage.type == "Approval"
+#  has_key(input.pipeline.stages[i].stage.spec.execution.steps[0],"stepGroup")
+#  not has_key(input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup,"template")
+#  msg := sprintf("Approval stage '%s' does not have template approval '%s' in first stepgroup", [input.pipeline.stages[i].stage.name,template_as_stepgroup_id])
+#}
+
+# 3b. Check if first stepgroup template has CORRECT templateRef in deploy stage - complete
+deny[msg] {
+  not contains_approval_stage_template(input.pipeline.stages,template_as_stage_id)
+  input.pipeline.stages[i].stage.type == "Approval"
+  has_key(input.pipeline.stages[i].stage.spec.execution.steps[0],"stepGroup")
+  has_key(input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup,"template")
+  input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.template.templateRef != template_as_stepgroup_id
+  msg := sprintf("Approval stage '%s' has incorrect stepgroup template '%s', should be '%s'", [input.pipeline.stages[i].stage.name,input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[_].step.template.templateRef,template_as_stepgroup_id])
 }
 
 ######################### DEPLOY STAGE OPA #########################
