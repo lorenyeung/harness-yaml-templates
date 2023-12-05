@@ -11,7 +11,7 @@ Every entity being checked will be against the first one in the stage:
 * first stepgroup
 * first stepgroup template
 
-ensuring that the approval exists in the approval stage. Each entity will first do a check for existence of a template, followed by checking if it is the correct 'allowed' template (defined in the variables up top). This double rule for each type is done due to rego not returning the correct true/false condition if the 'template' key does not exist.
+ensuring that the approval exists in the approval stage. Each entity will first do a check for existence of a template, followed by checking if it is the correct 'allowed' template and version (defined in the variables up top). This double rule for each type is done due to rego not returning the correct true/false condition if the 'template' key does not exist.
 
 
 ## Deploy stages
@@ -23,10 +23,11 @@ To reduce chances of ordering mishaps, every entity being checked will be agains
 * first stepgroup
 * first parallel step
 * first stepgroup with parallel steps
+* (TODO: first stepgroup template)
 
-ensuring that the approval exists before the deploy step. Each entity will first do a check for existence of a template, followed by checking if it is the correct 'allowed' template (defined in the variables up top). This double rule for each type is done due to rego not returning the correct true/false condition if the 'template' key does not exist.
+ensuring that the approval exists before the deploy step. Each entity will first do a check for existence of a template, followed by checking if it is the correct 'allowed' template and version (defined in the variables up top). This double rule for each type is done due to rego not returning the correct true/false condition if the 'template' key does not exist.
 
-The step template for deploy stages will ideally be created with a conditional execution in mind, where the type is set to 'prod', for example:
+The step template for deploy stages will ideally be created with a conditional execution in mind, where the `<+env.type>` is set to `'Production'`, for example:
 
 ```
 template:
@@ -50,3 +51,6 @@ template:
   identifier: prod_approval
   versionLabel: v1
 ```
+### Future features
+* exempt orgs/projects pairing
+* list of approval types
