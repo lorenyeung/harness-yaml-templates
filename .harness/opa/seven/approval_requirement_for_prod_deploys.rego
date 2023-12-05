@@ -149,7 +149,7 @@ deny[msg] {
   has_key(input.pipeline.stages[i].stage.spec.execution.steps[0],"stepGroup")
   has_key(input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[0],"parallel")
   has_key_parallel_array(input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[0],"template")
-  input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[0].parallel[_].step.template.templateRef != template_ds_step_id
+  not parallel_contains_atleast_one(input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[0].parallel,template_ds_step_id)
   msg := sprintf("Deploy stage '%s' has incorrect first parallel stepgroup template step '%s', atleast one should be '%s'", [input.pipeline.stages[i].stage.name,input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[0].parallel[_].step.template.templateRef,template_ds_step_id])
 }
 
