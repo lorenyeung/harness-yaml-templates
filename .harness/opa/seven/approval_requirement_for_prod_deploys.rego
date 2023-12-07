@@ -81,24 +81,14 @@ deny[msg] {
 }
 
 ######################### DEPLOY STAGE OPA #########################
-# 1a. Check if first step has ANY templateRef in deploy stage - complete
-deny[msg] {
-  # ignore if there exists an approval stage
-  not contains_stage_type(input.pipeline.stages,"Approval")
-  # Find all stages that are Deployments ...
-  input.pipeline.stages[i].stage.type == "Deployment"
-  not has_key(input.pipeline.stages[i].stage.spec.execution.steps[0].step,"template")
-  msg := sprintf("Deploy stage '%s' does not have template approval '%s:%s' as first step", [input.pipeline.stages[i].stage.name,template_ds_step_id,template_ds_step_version])
-}
-
-# 1b. Check if first step has CORRECT templateRef in deploy stage - complete
+# 1. Check if first step has ANY, then CORRECT templateRef in deploy stage - complete
 deny[msg] {
   not contains_stage_type(input.pipeline.stages,"Approval")
   input.pipeline.stages[i].stage.type == "Deployment"
   array = input.pipeline.stages[i].stage.spec.execution.steps[0].step
-  has_key(array,"template")
-  not correct_template_id_and_version(array.template,template_ds_step_id,template_ds_step_version)
-  msg := sprintf("Deploy stage '%s' has incorrect first step template '%s:%s', should be '%s:%s'", [input.pipeline.stages[i].stage.name,array.template.templateRef,array.template.versionLabel, template_ds_step_id,template_ds_step_version])
+  not correct_template_id_and_version_two(array,template_ds_step_id,template_ds_step_version)
+  used_template = get_used_template_id_and_version(array,"step")
+  msg := sprintf("1c Deploy stage '%s' %s", [input.pipeline.stages[i].stage.name,used_template])
 }
 
 # 2a. Check if first parallel step has ANY templateRef in deploy stage - complete
@@ -149,7 +139,7 @@ deny[msg] {
   has_key(input.pipeline.stages[i].stage.spec.execution.steps[0],"stepGroup")
   has_key(input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[0],"parallel")
   not has_key_parallel_array(input.pipeline.stages[i].stage.spec.execution.steps[0].stepGroup.steps[0],"template")
-  msg := sprintf("Deploy stage '%s' does not have template approval '%s:%s' in first parallel stepgroup", [input.pipeline.stages[i].stage.name,template_ds_step_id])
+  msg := sprintf("4a Deploy stage '%s' does not have template approval '%s:%s' in first parallel stepgroup", [input.pipeline.stages[i].stage.name,template_ds_step_id])
 }
 
 # 4b. Check if first parallel stepgroup has CORRECT templateRef in deploy stage - complete
@@ -161,7 +151,7 @@ deny[msg] {
   has_key(array.stepGroup.steps[0],"parallel")
   has_key_parallel_array(array.stepGroup.steps[0],"template")
   not parallel_contains_atleast_one(array.stepGroup.steps[0].parallel,template_ds_step_id,template_ds_step_version)
-  msg := sprintf("Deploy stage '%s' has incorrect first parallel stepgroup template step '%s:%s', atleast one should be '%s:%s'", [input.pipeline.stages[i].stage.name,array.stepGroup.steps[0].parallel[_].step.template.templateRef,array.stepGroup.steps[0].parallel[_].step.template.versionLabel,template_ds_step_id,template_ds_step_version])
+  msg := sprintf("4b Deploy stage '%s' has incorrect first parallel stepgroup template step '%s:%s', atleast one should be '%s:%s'", [input.pipeline.stages[i].stage.name,array.stepGroup.steps[0].parallel[_].step.template.templateRef,array.stepGroup.steps[0].parallel[_].step.template.versionLabel,template_ds_step_id,template_ds_step_version])
 }
 
 # 5a. Check if first stepgroup template has ANY templateRef in deploy stage - WIP
@@ -189,6 +179,24 @@ contains_stage_type(arr, elem) {
 correct_template_id_and_version(check,correct_id,correct_version) {
   check.versionLabel = correct_version
   check.templateRef = correct_id
+}
+
+correct_template_id_and_version_two(check,correct_id,correct_version){
+  has_key(check,"template")
+  check.template.versionLabel = correct_version
+  check.template.templateRef = correct_id
+}
+
+# return if exists
+get_used_template_id_and_version(check,type) = output {
+  has_key(check,"template")
+  output := concat("",["has incorrect first ",type," template '",check.template.templateRef,":",check.template.versionLabel,"', should be '",template_ds_step_id,":",template_ds_step_version,"'"])
+}
+
+# return if empty
+get_used_template_id_and_version(check,type) = output {
+  not has_key(check,"template")
+  output := concat("",["does not have template approval '", template_ds_step_id,":",template_ds_step_version,"' as first ",type])
 }
 
 # check approval stage template
