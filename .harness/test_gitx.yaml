@@ -29,6 +29,8 @@ pipeline:
                   name: Run_1
                   identifier: Run_1
                   spec:
+                    connectorRef: <+input>
+                    image: <+input>
                     shell: Sh
                     command: |-
                       echo "github:" <+trigger.payload.head_commit.message>
