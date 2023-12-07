@@ -1,5 +1,6 @@
 inputSet:
   name: github-workshop
+  tags: {}
   identifier: githubworkshop
   orgIdentifier: default
   projectIdentifier: technical_exercise
@@ -17,4 +18,4 @@ inputSet:
                     type: Run
                     spec:
                       connectorRef: account.lorenharnessdockerhub
-                      image: library/nginx:dev
+                      image: <+trigger.payload.image>
