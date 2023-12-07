@@ -1,0 +1,20 @@
+inputSet:
+  name: github-workshop
+  identifier: githubworkshop
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
+  pipeline:
+    identifier: test_gitx
+    stages:
+      - stage:
+          identifier: test
+          type: CI
+          spec:
+            execution:
+              steps:
+                - step:
+                    identifier: Run_1
+                    type: Run
+                    spec:
+                      connectorRef: account.lorenharnessdockerhub
+                      image: library/nginx:dev
