@@ -1,0 +1,27 @@
+template:
+  name: ordering
+  identifier: ordering
+  type: Step
+  projectIdentifier: foo
+  orgIdentifier: defaultorg
+  tags: {}
+  spec:
+    timeout: 10m
+    type: ShellScript
+    spec:
+      shell: Bash
+      onDelegate: true
+      source:
+        type: Inline
+        spec:
+          script: |-
+            echo
+            ls
+            edit
+            add more
+            pwd
+
+            add some lines
+      environmentVariables: []
+      outputVariables: []
+  versionLabel: v3
