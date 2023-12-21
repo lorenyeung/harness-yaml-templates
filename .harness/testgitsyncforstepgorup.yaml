@@ -42,6 +42,7 @@ inputSet:
             type: branch
             spec:
               branch: <+trigger.branch>
-  provider:
-    label: Others
-    value: Others
+    variables:
+      - name: test
+        type: String
+        value: <+input>
