@@ -1,5 +1,6 @@
 inputSet:
   name: test-gitsync-for-stepgorup
+  tags: {}
   identifier: testgitsyncforstepgorup
   orgIdentifier: default
   projectIdentifier: technical_exercise
@@ -22,3 +23,10 @@ inputSet:
                               items:
                                 - usw
                                 - use
+    properties:
+      ci:
+        codebase:
+          build: <+input>
+  provider:
+    label: Others
+    value: Others
