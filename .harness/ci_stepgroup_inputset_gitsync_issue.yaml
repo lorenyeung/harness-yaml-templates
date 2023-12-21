@@ -1,0 +1,79 @@
+pipeline:
+  name: ci - stepgroup inputset gitsync issue
+  identifier: ci_stepgroup_inputset_gitsync_issue
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags:
+    "6": ""
+    ci: ""
+  stages:
+    - stage:
+        name: ci stepgroup
+        identifier: ci_stepgroup_with_stage_variable
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: false
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.colimak8s
+              namespace: loren-dev
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
+          execution:
+            steps:
+              - stepGroup:
+                  name: sg
+                  identifier: sg
+                  steps:
+                    - stepGroup:
+                        name: docker
+                        identifier: docker
+                        steps:
+                          - step:
+                              type: Background
+                              name: Background_1
+                              identifier: Background_1
+                              spec:
+                                connectorRef: account.lorenharnessdockerhub
+                                image: docker:dind
+                                shell: Sh
+                                resources:
+                                  limits:
+                                    memory: 100Mi
+                                    cpu: 100m
+                          - step:
+                              type: Run
+                              name: docker
+                              identifier: Run_1
+                              spec:
+                                connectorRef: account.lorenharnessdockerhub
+                                image: docker
+                                shell: Sh
+                                command: |
+                                  echo <+repeat.item>
+
+                                  while ! docker ps ;do
+                                        echo "Docker not available yet"
+                                        sleep 1
+                                  done
+                                  echo "Docker Service Ready"
+                                  docker ps
+                                resources:
+                                  limits:
+                                    memory: 100Mi
+                                    cpu: 100m
+                        variables: []
+                        strategy:
+                          repeat:
+                            items: <+input>.default(["usw","use"])
+          sharedPaths:
+            - /var/run
+            - /var/lib/docker
+          caching:
+            enabled: false
+            paths: []
+  description: various tests of matrix strategy to loop stepgroups
+  allowStageExecutions: true
