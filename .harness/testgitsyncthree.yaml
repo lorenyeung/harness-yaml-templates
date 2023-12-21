@@ -1,5 +1,6 @@
 inputSet:
   name: testgitsyncthree
+  tags: {}
   identifier: testgitsyncthree
   orgIdentifier: default
   projectIdentifier: technical_exercise
@@ -42,4 +43,3 @@ inputSet:
       - name: test
         type: String
         value: <+input>
-  object Object: pipeline.properties.ci.codebase
