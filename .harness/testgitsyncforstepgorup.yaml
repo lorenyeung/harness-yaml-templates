@@ -14,15 +14,27 @@ inputSet:
             execution:
               steps:
                 - stepGroup:
-                    identifier: sg
-                    steps:
-                      - stepGroup:
-                          identifier: docker
-                          strategy:
-                            repeat:
-                              items:
-                                - usw
-                                - use
+                    identifier: templatesg
+                    template:
+                      templateInputs:
+                        steps:
+                          - stepGroup:
+                              identifier: Build
+                              steps:
+                                - step:
+                                    identifier: docker_build
+                                    type: Run
+                                    spec:
+                                      envVariables:
+                                        docker_file: ""
+                                        working_directory: ""
+                                        build_opts: ""
+                                        aws_ecr_repository_name: ""
+                              strategy:
+                                matrix:
+                                  region:
+                                    - us-east-1
+                                    - us-west-2
     properties:
       ci:
         codebase:
@@ -30,3 +42,6 @@ inputSet:
             type: branch
             spec:
               branch: <+trigger.branch>
+  provider:
+    label: Others
+    value: Others
