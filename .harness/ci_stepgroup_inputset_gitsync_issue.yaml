@@ -25,50 +25,28 @@ pipeline:
           execution:
             steps:
               - stepGroup:
-                  name: sg
-                  identifier: sg
-                  steps:
-                    - stepGroup:
-                        name: docker
-                        identifier: docker
-                        steps:
-                          - step:
-                              type: Background
-                              name: Background_1
-                              identifier: Background_1
-                              spec:
-                                connectorRef: account.lorenharnessdockerhub
-                                image: docker:dind
-                                shell: Sh
-                                resources:
-                                  limits:
-                                    memory: 100Mi
-                                    cpu: 100m
-                          - step:
-                              type: Run
-                              name: docker
-                              identifier: Run_1
-                              spec:
-                                connectorRef: account.lorenharnessdockerhub
-                                image: docker
-                                shell: Sh
-                                command: |
-                                  echo <+repeat.item>
-
-                                  while ! docker ps ;do
-                                        echo "Docker not available yet"
-                                        sleep 1
-                                  done
-                                  echo "Docker Service Ready"
-                                  docker ps
-                                resources:
-                                  limits:
-                                    memory: 100Mi
-                                    cpu: 100m
-                        variables: []
-                        strategy:
-                          repeat:
-                            items: <+input>.default(["usw","use"])
+                  name: templatesg
+                  identifier: templatesg
+                  template:
+                    templateRef: account.dockerbuildscanpushstepgrouptemplate2
+                    versionLabel: v1.1.0
+                    templateInputs:
+                      steps:
+                        - stepGroup:
+                            identifier: Build
+                            steps:
+                              - step:
+                                  identifier: docker_build
+                                  type: Run
+                                  spec:
+                                    envVariables:
+                                      docker_file: <+input>
+                                      working_directory: <+input>
+                                      build_opts: <+input>
+                                      aws_ecr_repository_name: <+input>.regex([a-z0-9-]+(/[a-z0-9-]+)+)
+                            strategy:
+                              matrix:
+                                region: <+input>.default(["us-east-1","us-west-2"])
           sharedPaths:
             - /var/run
             - /var/lib/docker
