@@ -83,3 +83,4 @@ pipeline:
         connectorRef: account.ghconnectoracc
         repoName: something
         build: <+input>
+        prCloneStrategy: SourceBranch
