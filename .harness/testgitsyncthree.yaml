@@ -1,0 +1,45 @@
+inputSet:
+  name: testgitsyncthree
+  identifier: testgitsyncthree
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
+  pipeline:
+    identifier: ci_stepgroup_inputset_gitsync_issue
+    stages:
+      - stage:
+          identifier: ci_stepgroup_with_stage_variable
+          type: CI
+          spec:
+            execution:
+              steps:
+                - stepGroup:
+                    identifier: two
+                    template:
+                      templateInputs:
+                        steps:
+                          - stepGroup:
+                              identifier: Build
+                              steps:
+                                - step:
+                                    identifier: docker_build
+                                    type: Run
+                                    spec:
+                                      envVariables:
+                                        docker_file: ""
+                                        working_directory: ""
+                                        build_opts: ""
+                                        aws_ecr_repository_name: ""
+                              strategy:
+                                matrix:
+                                  region:
+                                    - us-east-1
+                                    - us-west-2
+    properties:
+      ci:
+        codebase:
+          build: <+input>
+    variables:
+      - name: test
+        type: String
+        value: <+input>
+  object Object: pipeline.properties.ci.codebase
