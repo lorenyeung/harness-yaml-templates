@@ -1,0 +1,24 @@
+inputSet:
+  name: test-gitsync-for-stepgorup
+  identifier: testgitsyncforstepgorup
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
+  pipeline:
+    identifier: ci_stepgroup_inputset_gitsync_issue
+    stages:
+      - stage:
+          identifier: ci_stepgroup_with_stage_variable
+          type: CI
+          spec:
+            execution:
+              steps:
+                - stepGroup:
+                    identifier: sg
+                    steps:
+                      - stepGroup:
+                          identifier: docker
+                          strategy:
+                            repeat:
+                              items:
+                                - usw
+                                - use
