@@ -26,4 +26,7 @@ inputSet:
     properties:
       ci:
         codebase:
-          build: <+input>
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
