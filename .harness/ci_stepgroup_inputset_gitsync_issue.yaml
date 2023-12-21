@@ -77,3 +77,9 @@ pipeline:
             paths: []
   description: various tests of matrix strategy to loop stepgroups
   allowStageExecutions: true
+  properties:
+    ci:
+      codebase:
+        connectorRef: account.ghconnectoracc
+        repoName: something
+        build: <+input>
