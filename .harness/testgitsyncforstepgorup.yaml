@@ -14,7 +14,7 @@ inputSet:
             execution:
               steps:
                 - stepGroup:
-                    identifier: templatesg
+                    identifier: two
                     template:
                       templateInputs:
                         steps:
