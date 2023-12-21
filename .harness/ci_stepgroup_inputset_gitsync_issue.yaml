@@ -61,3 +61,9 @@ pipeline:
         connectorRef: account.ghconnectoracc
         repoName: something
         build: <+input>
+  variables:
+    - name: test
+      type: String
+      description: ""
+      required: false
+      value: <+input>
