@@ -27,6 +27,3 @@ inputSet:
       ci:
         codebase:
           build: <+input>
-  provider:
-    label: Others
-    value: Others
