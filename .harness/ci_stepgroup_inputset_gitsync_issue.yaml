@@ -25,8 +25,8 @@ pipeline:
           execution:
             steps:
               - stepGroup:
-                  name: templatesg
-                  identifier: templatesg
+                  name: two
+                  identifier: two
                   template:
                     templateRef: account.dockerbuildscanpushstepgrouptemplate2
                     versionLabel: v1.1.0
