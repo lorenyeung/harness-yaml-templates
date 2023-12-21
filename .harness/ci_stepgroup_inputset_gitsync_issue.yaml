@@ -59,7 +59,7 @@ pipeline:
     ci:
       codebase:
         connectorRef: account.ghconnectoracc
-        repoName: something
+        repoName: something2
         build: <+input>
   variables:
     - name: test
