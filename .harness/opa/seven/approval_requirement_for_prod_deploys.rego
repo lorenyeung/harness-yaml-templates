@@ -1,5 +1,8 @@
 package pipeline
 
+import future.keywords.if
+import future.keywords.in
+
 #deploy stage default template ids
 default template_ds_step_id = "account.prod_approval"
 default template_ds_step_version = "v1"
@@ -139,6 +142,18 @@ get_used_template_id_and_version(check,type,id,version) = output {
 get_used_template_id_and_version(check,type,id,version) = output {
   not has_key(check,"template")
   output := concat("",["does not have template approval '", id,":",version,"' as first ",type])
+}
+
+# This method will recursively walk the entire document by parsing out each key and compares it against the
+# key type requested.  Upon a pattern match, an array of each path segment is sent back
+walk_document(eval_doc, eval_type) = {final_path |
+	[path, value] := walk(eval_doc)
+	obj_type := path[count(path) - 1]
+	obj_type == eval_type
+
+	value != "REGO requires we use any declared variable so this is a workaround"
+
+	final_path := [elem | some elem in path]
 }
 
 # check approval stage template
