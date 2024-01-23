@@ -1,5 +1,5 @@
 environment:
-  name: gitx-dev
+name: gitx-dev
   identifier: gitxdev
   accountId: WqS38aeyQjayoqy6mzwceA
   orgIdentifier: default
