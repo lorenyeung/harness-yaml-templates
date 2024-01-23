@@ -1,0 +1,44 @@
+template:
+  name: stage_aws_account
+  identifier: stage_aws_account
+  versionLabel: v1
+  type: Stage
+  tags: {}
+  spec:
+    type: CI
+    spec:
+      cloneCodebase: false
+      platform:
+        os: Linux
+        arch: Amd64
+      runtime:
+        type: Cloud
+        spec: {}
+      execution:
+        steps:
+          - stepGroup:
+              name: stepgroup
+              identifier: stepgroup
+              template:
+                templateRef: account.stepgroup_aws_account
+                versionLabel: v1
+                templateInputs:
+                  steps:
+                    - stepGroup:
+                        identifier: stepgroup
+                        steps:
+                          - step:
+                              identifier: step_aws_account
+                              template:
+                                templateInputs:
+                                  type: AWSECR
+                                  spec:
+                                    auth:
+                                      access_token: <+input>
+                                      access_id: <+input>
+                                      region: <+input>
+                                    image:
+                                      type: aws_ecr
+                                      name: <+input>
+                                      region: <+input>
+                                      tag: <+input>

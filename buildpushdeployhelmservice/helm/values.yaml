@@ -1,0 +1,15 @@
+namespace: <+infra.namespace>
+image: 
+  repository: <+artifact.imagePath>
+  tag: <+artifact.tag>
+commonLabels:
+  harness.io/release: "{{ .Release.Name }}"
+  release: "{{ .Release.Name }}"
+podLabels:
+  harness.io/release: "{{ .Release.Name }}"
+  release: "{{ .Release.Name }}"
+podAnnotations:
+  gitsha: "a04b5a441b8ca36c280d1736e1dff1a9e1793ae8"
+extraMatchLabels:
+  app.harness.io/release: "{{ .Release.Name }}"
+  release: "{{ .Release.Name }}"  

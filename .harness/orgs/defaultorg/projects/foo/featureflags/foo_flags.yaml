@@ -1,0 +1,86 @@
+featureFlags:
+  flags:
+  - flag:
+      name: test
+      identifier: test
+      description: ""
+      permanent: false
+      spec:
+        type: boolean
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        variations:
+        - identifier: "true"
+          value: "true"
+        - identifier: "false"
+          value: "false"
+      environments:
+      - identifier: dev
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: prod
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: test
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: devshouldsucceed
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: test3
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+  - flag:
+      name: testflag
+      identifier: testflag
+      description: ""
+      permanent: false
+      spec:
+        type: boolean
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        variations:
+        - identifier: "true"
+          value: "true"
+        - identifier: "false"
+          value: "false"
+      environments:
+      - identifier: dev
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: prod
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: test
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: devshouldsucceed
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+      - identifier: test3
+        default:
+          onVariation: "false"
+          offVariation: "false"
+        state: "off"
+  projectIdentifier: foo
+  orgIdentifier: defaultorg
