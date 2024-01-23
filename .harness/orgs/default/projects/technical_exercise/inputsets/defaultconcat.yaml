@@ -1,0 +1,15 @@
+inputSet:
+  name: default
+  identifier: default
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
+  pipeline:
+    identifier: ci_variable_concatenation
+    properties:
+      ci:
+        codebase:
+          build:
+            type: branch
+            spec:
+              branch: <+trigger.branch>
+  object Object: pipeline.properties.ci.codebase
