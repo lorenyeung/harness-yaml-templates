@@ -4,3 +4,7 @@ overrides:
       type: String
       value: over
       required: false
+    - name: two
+      type: String
+      value: overtwo
+      required: false
