@@ -5,11 +5,10 @@ overrides:
       value: over
       required: false
     - name: two
-      type: string
+      type: String
       value: overtwo
       required: false
-    - name: three
-      type: string
-      value: overthree
+    - name: "3"
+      type: String
+      value: "3"
       required: false
-
