@@ -79,7 +79,7 @@ pipeline:
                       with:
                         github-token: <+execution.steps.create_jwt_token.output.outputVariables.jwt>
                         detect-version: 8.4.0
-                        blackduck-url: informatica.app.blackduck.com
+                        blackduck-url: example.app.blackduck.com
                         blackduck-api-token: <+secrets.getValue("bd_password")>
                     imagePullPolicy: IfNotPresent
                     resources:
@@ -112,7 +112,7 @@ pipeline:
             type: KubernetesDirect
             spec:
               connectorRef: org.lorenharnessawsorgcluster
-              namespace: informatica
+              namespace: example 
               automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
