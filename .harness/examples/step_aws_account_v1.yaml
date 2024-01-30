@@ -1,0 +1,28 @@
+template:
+  name: step_aws_account
+  identifier: step_aws_account
+  versionLabel: v1
+  type: Step
+  tags: {}
+  spec:
+    type: AWSECR
+    spec:
+      mode: extraction
+      config: default
+      target:
+        name: scan-ecr-account
+        type: container
+        variant: main
+      advanced:
+        log:
+          level: info
+      auth:
+        access_token: <+input>
+        access_id: <+input>
+        region: <+input>
+      image:
+        type: aws_ecr
+        name: <+input>
+        region: <+input>
+        tag: <+input>
+    description: some step

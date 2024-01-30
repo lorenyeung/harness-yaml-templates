@@ -1,0 +1,14 @@
+overrides:
+  variables:
+    - name: test
+      type: String
+      value: over
+      required: false
+    - name: two
+      type: String
+      value: overtwo
+      required: false
+    - name: "3"
+      type: String
+      value: "3"
+      required: false

@@ -1,0 +1,2 @@
+ci/gradle/gradle-example-multi-repos/.gradle/
+ci/maven/codecov-travis-maven-junit5-example/codecov-test2/target/
