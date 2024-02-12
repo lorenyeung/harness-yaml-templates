@@ -8,5 +8,5 @@ template:
       image: alpine
       shell: Sh
       command: echo "hello"
-  identifier: copy_something
+  identifier: Copy_Something
   versionLabel: v1
