@@ -1,0 +1,12 @@
+template:
+  name: Copy Something
+  type: Step
+  spec:
+    type: Run
+    spec:
+      connectorRef: account.harnessImage
+      image: alpine
+      shell: Sh
+      command: echo "hello"
+  identifier: copy_something
+  versionLabel: v1
