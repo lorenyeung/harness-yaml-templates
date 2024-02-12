@@ -9,4 +9,4 @@ template:
       shell: Sh
       command: echo "hello"
   identifier: Copy_Something
-  versionLabel: v1
+  versionLabel: v1.0.0
