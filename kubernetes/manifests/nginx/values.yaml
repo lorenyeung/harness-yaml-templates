@@ -1,2 +1,2 @@
-metadata:
-  namespace: devcolima
+namespace: default
+replicas: 2
