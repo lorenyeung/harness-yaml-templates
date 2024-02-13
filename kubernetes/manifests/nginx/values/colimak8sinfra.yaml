@@ -1,2 +1,4 @@
 metadata:
   namespace: devcolima
+spec:
+  replicas: 1
