@@ -1,0 +1,42 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  namespace: loren-dev
+  name: ingress
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:us-west-1:ACCOUNT:certificate/XXXX
+    alb.ingress.kubernetes.io/backend-protocol: 'HTTPS'
+    alb.ingress.kubernetes.io/healthcheck-protocol: 'HTTPS'
+spec:
+  ingressClassName: alb
+  tls:
+  - hosts:
+    - *.us-west-1.elb.amazonaws.com
+  rules:
+    - http:
+        paths:
+        - path: /services/search/*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: splunk-s1-standalone-service
+              port:
+                number: 8089
+        - path: /services/collector/*
+          pathType: ImplementationSpecific
+          backend:
+            service:
+              name: splunk-s1-standalone-service
+              port:
+                number: 8088
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: splunk-s1-standalone-service
+              port:
+                number: 8089
