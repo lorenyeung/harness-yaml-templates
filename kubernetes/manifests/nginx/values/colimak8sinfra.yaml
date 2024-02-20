@@ -1,2 +1,2 @@
-namespace: devcolima
+namespace: <+infra.namespace>
 replicas: 1
