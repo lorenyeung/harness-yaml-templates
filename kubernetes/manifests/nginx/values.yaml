@@ -1,3 +1,2 @@
 name: hello
-namespace: default
 replicas: 2
