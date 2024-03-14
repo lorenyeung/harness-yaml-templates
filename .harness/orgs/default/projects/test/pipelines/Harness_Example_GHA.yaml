@@ -11,7 +11,7 @@ pipeline:
         build: <+input>
   stages:
     - stage:
-        name: gha
+        name: gha2
         identifier: gha
         description: test2
         type: CI
