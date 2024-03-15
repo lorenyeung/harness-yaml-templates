@@ -1,3 +1,15 @@
 namespace: <+infra.namespace>
 replicas: 1
 name: <+service.identifier>
+
+serviceType: LoadBalancer
+
+servicePort: 80
+serviceTargetPort: 80
+
+# Both are added to the container environment in podSpec as envFrom source.
+env:
+  config:
+    key1: value10
+  secrets:
+    key2: value2
