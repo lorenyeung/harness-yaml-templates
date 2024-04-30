@@ -12,9 +12,3 @@ pipeline:
         template:
           templateRef: account.example_template
           versionLabel: v1
-          templateInputs:
-            type: Custom
-            variables:
-              - name: asdf
-                type: String
-                value: <+input>
