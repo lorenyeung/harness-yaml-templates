@@ -15,6 +15,6 @@ pipeline:
           templateInputs:
             type: Custom
             variables:
-              - name: newvar
+              - name: asdf
                 type: String
                 value: <+input>
