@@ -4,3 +4,4 @@ image:
   tag: <+artifact.tag>
 commonLabels:
   harness.io/release: <+service.identifier.replaceAll("_","")>
+  release: <+service.identifier.replaceAll("_","")>
