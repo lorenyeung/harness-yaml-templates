@@ -1,7 +1,13 @@
-environment:
+infrastructureDefinition:
   name: broken-test-dev
   identifier: brokentestdev
-  accountId: WqS38aeyQjayoqy6mzwceA
   orgIdentifier: default
   projectIdentifier: technical_exercise
-  type: PreProduction
+  environmentRef: brokentestdev
+  deploymentType: Kubernetes
+  type: KubernetesDirect
+  spec:
+    connectorRef: <+input>
+    namespace: <+input>
+    releaseName: release-<+INFRA_KEY_SHORT_ID>
+  allowSimultaneousDeployments: false
