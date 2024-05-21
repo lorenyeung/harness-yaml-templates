@@ -1,6 +1,6 @@
 infrastructureDefinition:
-  name: infra
-  identifier: infra
+  name: ""
+  identifier: ""
   orgIdentifier: default
   projectIdentifier: technical_exercise
   environmentRef: gitxdev
