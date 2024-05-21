@@ -1,6 +1,6 @@
 environment:
-  name: gitx-dev
-  identifier: gitxdev
+  name: ""
+  identifier: ""
   accountId: WqS38aeyQjayoqy6mzwceA
   orgIdentifier: default
   projectIdentifier: technical_exercise
