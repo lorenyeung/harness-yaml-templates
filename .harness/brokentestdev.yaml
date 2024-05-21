@@ -1,0 +1,7 @@
+environment:
+  name: broken-test-dev
+  identifier: brokentestdev
+  accountId: WqS38aeyQjayoqy6mzwceA
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
+  type: PreProduction
