@@ -1,13 +1,13 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: alpine
-  namespace: loren-dev
+  name: {{.Values.name}}
+  namespace: {{.Values.namespace}}
 spec:
   selector:
     matchLabels:
       app: alpine
-  replicas: 1
+  replicas: {{.Values.replicas}}
   template:
     metadata:
       labels:
@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: alpine
-        image: <+artifacts.primary.image>:<+artifacts.primary.tag>
+        image: {{.Values.image}}:{{.Values.tag}}
         ports:
         - containerPort: 80
