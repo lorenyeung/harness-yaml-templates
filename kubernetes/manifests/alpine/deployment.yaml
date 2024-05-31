@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: alpine
+  namespace: loren-dev
+spec:
+  selector:
+    matchLabels:
+      app: alpine
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: alpine
+    spec:
+      containers:
+      - name: alpine
+        image: <+.artifacts.primary.image>:<+artifacts.primary.tag>
+        ports:
+        - containerPort: 80
