@@ -15,6 +15,6 @@ spec:
     spec:
       containers:
       - name: alpine
-        image: <+.artifacts.primary.image>:<+artifacts.primary.tag>
+        image: <+artifacts.primary.image>:<+artifacts.primary.tag>
         ports:
         - containerPort: 80
