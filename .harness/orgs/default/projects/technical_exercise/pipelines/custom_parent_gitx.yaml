@@ -1,0 +1,42 @@
+pipeline:
+  name: custom - parent gitx
+  identifier: custom_parent_gitx
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags:
+    "15": ""
+    custom: ""
+  stages:
+    - stage:
+        name: child1
+        identifier: child1
+        description: ""
+        type: Pipeline
+        spec:
+          org: default
+          pipeline: custom_child1_gitx
+          project: technical_exercise
+          inputs:
+            identifier: custom_child1_gitx
+            stages:
+              - stage:
+                  identifier: cd
+                  type: Deployment
+                  spec:
+                    service:
+                      serviceInputs:
+                        serviceDefinition:
+                          type: Kubernetes
+                          spec:
+                            artifacts:
+                              primary:
+                                primaryArtifactRef: <+input>
+                                sources: <+input>
+                    environment:
+                      infrastructureDefinitions:
+                        - identifier: colimak8sinfra
+                          inputs:
+                            identifier: colimak8sinfra
+                            type: KubernetesDirect
+                            spec:
+                              namespace: <+input>.default(loren-dev)
