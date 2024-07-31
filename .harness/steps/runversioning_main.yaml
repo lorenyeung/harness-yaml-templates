@@ -6,6 +6,8 @@ template:
   spec:
     type: Run
     spec:
+      connectorRef: account.lorenharnessdockerhub
+      image: alpine
       shell: Sh
-      command: echo "this is version 1"
+      command: echo "this is version test to merge sas"; echo "add a feature"
   versionLabel: main
