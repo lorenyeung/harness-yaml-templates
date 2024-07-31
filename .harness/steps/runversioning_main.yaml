@@ -7,5 +7,5 @@ template:
     type: Run
     spec:
       shell: Sh
-      command: echo "this is version 1"
+      command: echo "this is version test to merge"
   versionLabel: main
