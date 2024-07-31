@@ -1,0 +1,68 @@
+pipeline:
+  name: custom - parent gitx
+  identifier: custom_parent_gitx
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags:
+    "15": ""
+    custom: ""
+  stages:
+    - stage:
+        name: ap
+        identifier: ap
+        description: ""
+        type: Approval
+        spec:
+          execution:
+            steps:
+              - step:
+                  name: s
+                  identifier: s
+                  type: HarnessApproval
+                  timeout: 1d
+                  spec:
+                    approvalMessage: |-
+                      Please review the following information
+                      and approve the pipeline progression
+                    includePipelineExecutionHistory: true
+                    approvers:
+                      minimumCount: 1
+                      disallowPipelineExecutor: false
+                      userGroups:
+                        - account.prod_deployers
+                    isAutoRejectEnabled: false
+                    approverInputs: []
+        tags: {}
+    - stage:
+        name: child1
+        identifier: child1
+        description: ""
+        type: Pipeline
+        spec:
+          org: default
+          pipeline: custom_child1_gitx
+          project: technical_exercise
+          inputs:
+            identifier: custom_child1_gitx
+            stages:
+              - stage:
+                  identifier: cd
+                  type: Deployment
+                  spec:
+                    service:
+                      serviceInputs:
+                        serviceDefinition:
+                          type: Kubernetes
+                          spec:
+                            artifacts:
+                              primary:
+                                primaryArtifactRef: <+input>
+                                sources: <+input>
+                    environment:
+                      infrastructureDefinitions:
+                        - identifier: colimak8sinfra
+                          inputs:
+                            identifier: colimak8sinfra
+                            type: KubernetesDirect
+                            spec:
+                              namespace: <+input>.default(loren-dev)

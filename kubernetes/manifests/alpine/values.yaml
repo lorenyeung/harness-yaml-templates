@@ -1,0 +1,5 @@
+namespace: <+infra.namespace>
+replicas: 1
+name: <+service.identifier>
+image: <+artifacts.primary.registryHostname>/<+artifacts.primary.imagePath>
+tag: <+artifacts.primary.tag>

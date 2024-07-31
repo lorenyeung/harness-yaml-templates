@@ -1,0 +1,22 @@
+inputSet:
+  name: example
+  identifier: goodexample3943
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
+  pipeline:
+    identifier: ci_bad_inputset_id
+    stages:
+      - stage:
+          identifier: bah
+          type: Custom
+          spec:
+            execution:
+              steps:
+                - step:
+                    identifier: ShellScript_1
+                    type: ShellScript
+                    spec:
+                      source:
+                        type: Inline
+                        spec:
+                          script: hello

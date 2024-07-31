@@ -1,0 +1,118 @@
+pipeline:
+  name: Harness Example - GHA
+  identifier: Harness_Example_GHA
+  projectIdentifier: CI_Quickstart
+  orgIdentifier: default
+  tags: {}
+  properties:
+    ci:
+      codebase:
+        connectorRef: org.harnesssamplegh
+        build: <+input>
+  stages:
+    - stage:
+        name: gha
+        identifier: gha
+        description: test2
+        type: CI
+        spec:
+          cloneCodebase: true
+          execution:
+            steps:
+              - step:
+                  type: Plugin
+                  name: veracode
+                  identifier: veracode
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: plugins/github-actions
+                    privileged: true
+                    settings:
+                      uses: veracode/veracode-uploadandscan-action@0.2.4
+                      with:
+                        appname: vera
+                        createprofile: false
+                        filepath: /harness/ci/maven/codecov-travis-maven-junit5-example/codecov-test2/target/codecov-test2-1.0-SNAPSHOT.jar
+                        version: 1
+                        vid: <+secrets.getValue("veracode_id")>
+                        vkey: <+secrets.getValue("veracode_key")>
+                    imagePullPolicy: IfNotPresent
+                    resources:
+                      limits:
+                        cpu: 200m
+                  failureStrategies:
+                    - onFailure:
+                        errors:
+                          - AllErrors
+                        action:
+                          type: Ignore
+                  when:
+                    stageStatus: Success
+              - step:
+                  type: Run
+                  name: create jwt token
+                  identifier: create_jwt_token
+                  spec:
+                    connectorRef: lorenharnessdockerhub
+                    image: python
+                    shell: Sh
+                    command: |-
+                      pip3 install PyJWT cryptography requests
+                      echo '<+secrets.getValue("gh-app-pem")>' > file
+                      export jwt=$(python3 /harness/ci/github-actions/gh-app-token-create/create-token.py file <+secrets.getValue("gh-app-id")> 2> /dev/null)
+                    outputVariables:
+                      - name: jwt
+                    imagePullPolicy: IfNotPresent
+                    resources:
+                      limits:
+                        cpu: 200m
+              - step:
+                  type: Plugin
+                  name: blackduck
+                  identifier: blackduck
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: plugins/github-actions
+                    privileged: true
+                    settings:
+                      uses: synopsys-sig/detect-action@v0.3.4
+                      with:
+                        github-token: <+execution.steps.create_jwt_token.output.outputVariables.jwt>
+                        detect-version: 8.4.0
+                        blackduck-url: example.app.blackduck.com
+                        blackduck-api-token: <+secrets.getValue("bd_password")>
+                    imagePullPolicy: IfNotPresent
+                    resources:
+                      limits:
+                        cpu: 200m
+                  when:
+                    stageStatus: Success
+              - step:
+                  type: Plugin
+                  name: stackrox
+                  identifier: stackrox
+                  spec:
+                    connectorRef: account.harnessImage
+                    image: plugins/github-actions
+                    privileged: true
+                    settings:
+                      uses: stackrox/kube-linter-action@v1.0.4
+                      with:
+                        directory: /harness/ci/github-actions/stackrox/yamls
+                        format: json
+                        output-file: kube-linter.json
+                      action_image: lorenharness/alpine-jq-yq-curl-bash-grep
+                    imagePullPolicy: IfNotPresent
+                    resources:
+                      limits:
+                        cpu: 200m
+                  when:
+                    stageStatus: Success
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: org.lorenharnessawsorgcluster
+              namespace: example 
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux

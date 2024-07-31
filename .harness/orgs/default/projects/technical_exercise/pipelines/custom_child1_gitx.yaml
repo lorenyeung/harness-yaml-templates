@@ -1,0 +1,66 @@
+pipeline:
+  name: custom - child1 gitx
+  identifier: custom_child1_gitx
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags:
+    "15": ""
+    cd: ""
+  stages:
+    - stage:
+        name: cd
+        identifier: cd
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: nginx_svc
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
+          environment:
+            environmentRef: dev
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: colimak8sinfra
+                inputs:
+                  identifier: colimak8sinfra
+                  type: KubernetesDirect
+                  spec:
+                    namespace: <+input>.default(loren-dev)
+          execution:
+            steps:
+              - step:
+                  type: ShellScript
+                  name: ShellScript_1
+                  identifier: ShellScript_1
+                  spec:
+                    shell: Bash
+                    executionTarget: {}
+                    source:
+                      type: Inline
+                      spec:
+                        script: echo "test"
+                    environmentVariables: []
+                    outputVariables: []
+                  timeout: 10m
+              - step:
+                  type: K8sDryRun
+                  name: K8sDryRun_1
+                  identifier: K8sDryRun_1
+                  spec: {}
+                  timeout: 10m
+            rollbackSteps: []
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback

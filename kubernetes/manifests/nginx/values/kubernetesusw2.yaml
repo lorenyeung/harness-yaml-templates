@@ -1,0 +1,5 @@
+replicas: 1
+namespace: <+infra.namespace>
+serviceType: LoadBalancer
+servicePort: 81
+serviceTargetPort: 80

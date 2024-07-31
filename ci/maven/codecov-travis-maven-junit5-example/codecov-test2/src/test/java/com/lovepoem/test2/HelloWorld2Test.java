@@ -25,4 +25,13 @@ public class HelloWorld2Test {
         assertEquals("Hello Universe!", subject.getMessage(true));
     }
 
+    @Test
+    public void testGetMessage3fail() {
+        assertEquals("Hello Universe!", subject.getMessage(false));
+    }
+
+    @Test
+    public void testGetMessage4() {
+        assertEquals("Hello Universe!", subject.getMessage(true));
+    }
 }

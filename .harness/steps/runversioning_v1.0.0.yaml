@@ -1,0 +1,11 @@
+template:
+  name: run-versioning
+  identifier: runversioning
+  versionLabel: v1.0.0
+  type: Step
+  tags: {}
+  spec:
+    type: Run
+    spec:
+      shell: Sh
+      command: echo "this is version 1"
