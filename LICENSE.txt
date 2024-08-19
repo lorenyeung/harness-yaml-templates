@@ -1,4 +1,4 @@
-dtiThe MIT License (MIT)
+edtiThe MIT License (MIT)
 
 Copyright (c) <year> Adam Veldhousen
 

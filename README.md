@@ -7,4 +7,4 @@ YAML
 
 Manifests
 
-CI package manager examples! c
+CI package manager examples! cd
