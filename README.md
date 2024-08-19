@@ -7,4 +7,4 @@ YAML
 
 Manifests
 
-CI package manager examples!dds
+CI package manager examples!ddsi
