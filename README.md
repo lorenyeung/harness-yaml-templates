@@ -7,4 +7,4 @@ YAML
 
 Manifests
 
-CI package manager examples!d
+CI package manager examples!dd
