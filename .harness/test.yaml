@@ -1,0 +1,35 @@
+inputSet:
+  name: test
+  identifier: test
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
+  pipeline:
+    identifier: custom_parent_gitx
+    stages:
+      - stage:
+          identifier: child1
+          type: Pipeline
+          spec:
+            inputs:
+              identifier: custom_child1_gitx
+              stages:
+                - stage:
+                    identifier: cd
+                    type: Deployment
+                    spec:
+                      service:
+                        serviceInputs:
+                          serviceDefinition:
+                            type: Kubernetes
+                            spec:
+                              artifacts:
+                                primary:
+                                  primaryArtifactRef: dh
+                      environment:
+                        infrastructureDefinitions:
+                          - identifier: colimak8sinfra
+                            inputs:
+                              identifier: colimak8sinfra
+                              type: KubernetesDirect
+                              spec:
+                                namespace: loren-dev
