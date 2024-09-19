@@ -6,4 +6,3 @@ image:
 commonLabels:
   harness.io/release-name: <+service.identifier.replaceAll("_","")>
   release: <+service.identifier.replaceAll("_","")>
-  test: <+secrets.getValue("hashicorpvault://tmpvault/d/c/s#pass")>
