@@ -1,4 +1,5 @@
 namespace: <+infra.namespace>
+replicas: 5
 image: 
   repository: <+artifact.imagePath>
   tag: <+artifact.tag>
