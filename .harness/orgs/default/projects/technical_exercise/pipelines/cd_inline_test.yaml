@@ -1,0 +1,53 @@
+pipeline:
+  name: cd - inline test
+  identifier: cd_inline_test
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags:
+    "29": ""
+  stages:
+    - stage:
+        name: cd
+        identifier: cd
+        description: ""
+        type: Deployment
+        spec:
+          deploymentType: Kubernetes
+          service:
+            serviceRef: gitbackedtestsvc
+            gitBranch: main
+          environment:
+            environmentRef: dev
+            deployToAll: false
+            infrastructureDefinitions:
+              - identifier: colimak8sinfra
+                inputs:
+                  identifier: colimak8sinfra
+                  type: KubernetesDirect
+                  spec:
+                    namespace: <+input>.default(loren-dev)
+          execution:
+            steps:
+              - step:
+                  name: Rollout Deployment
+                  identifier: rolloutDeployment
+                  type: K8sRollingDeploy
+                  timeout: 10m
+                  spec:
+                    skipDryRun: false
+                    pruningEnabled: false
+            rollbackSteps:
+              - step:
+                  name: Rollback Rollout Deployment
+                  identifier: rollbackRolloutDeployment
+                  type: K8sRollingRollback
+                  timeout: 10m
+                  spec:
+                    pruningEnabled: false
+        tags: {}
+        failureStrategies:
+          - onFailure:
+              errors:
+                - AllErrors
+              action:
+                type: StageRollback
