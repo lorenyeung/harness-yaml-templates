@@ -23,4 +23,15 @@ service:
                 - kubernetes/manifests/alpine/values.yaml
               skipResourceVersioning: false
               enableDeclarativeRollback: false
+      artifacts:
+        primary:
+          primaryArtifactRef: <+input>
+          sources:
+            - spec:
+                connectorRef: account.lorenharnessdockerhub
+                imagePath: alpine
+                tag: <+input>
+                digest: ""
+              identifier: artifact
+              type: DockerRegistry
     type: Kubernetes
