@@ -16,7 +16,7 @@ service:
                   connectorRef: account.ghconnectoracc
                   gitFetchType: Branch
                   paths:
-                    - manifests/alpine/deployment.yaml
+                    - manifests/alpine/
                   repoName: harness-yaml-templates
                   branch: loren-patch
               valuesPaths:
