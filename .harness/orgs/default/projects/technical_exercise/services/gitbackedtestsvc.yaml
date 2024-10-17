@@ -16,11 +16,11 @@ service:
                   connectorRef: account.ghconnectoracc
                   gitFetchType: Branch
                   paths:
-                    - manifests/alpine/
+                    - kubernetes/manifests/alpine/
                   repoName: harness-yaml-templates
                   branch: loren-patch
               valuesPaths:
-                - manifests/alpine/values.yaml
+                - kubernetes/manifests/alpine/values.yaml
               skipResourceVersioning: false
               enableDeclarativeRollback: false
     type: Kubernetes
