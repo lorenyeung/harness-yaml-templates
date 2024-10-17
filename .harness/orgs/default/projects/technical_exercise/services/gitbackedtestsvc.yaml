@@ -29,7 +29,7 @@ service:
           sources:
             - spec:
                 connectorRef: account.lorenharnessdockerhub
-                imagePath: alpine
+                imagePath: library/alpine
                 tag: <+input>
                 digest: ""
               identifier: artifact
