@@ -15,6 +15,14 @@ pipeline:
           deploymentType: Kubernetes
           service:
             serviceRef: gitbackedtestsvc
+            serviceInputs:
+              serviceDefinition:
+                type: Kubernetes
+                spec:
+                  artifacts:
+                    primary:
+                      primaryArtifactRef: <+input>
+                      sources: <+input>
             gitBranch: loren-patch
           environment:
             environmentRef: dev
