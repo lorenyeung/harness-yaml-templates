@@ -3,3 +3,24 @@ service:
   identifier: gitbackedtestsvc
   orgIdentifier: default
   projectIdentifier: technical_exercise
+  serviceDefinition:
+    spec:
+      manifests:
+        - manifest:
+            identifier: manifest
+            type: K8sManifest
+            spec:
+              store:
+                type: Github
+                spec:
+                  connectorRef: account.ghconnectoracc
+                  gitFetchType: Branch
+                  paths:
+                    - manifests/alpine/deployment.yaml
+                  repoName: harness-yaml-templates
+                  branch: loren-patch
+              valuesPaths:
+                - manifests/alpine/values.yaml
+              skipResourceVersioning: false
+              enableDeclarativeRollback: false
+    type: Kubernetes
