@@ -1,5 +1,0 @@
-service:
-  name: git-backed-test-svc
-  identifier: gitbackedtestsvc
-  orgIdentifier: default
-  projectIdentifier: technical_exercise
