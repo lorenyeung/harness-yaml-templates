@@ -15,7 +15,6 @@ pipeline:
           deploymentType: Kubernetes
           service:
             serviceRef: gitbackedtestsvc
-            gitBranch: loren-patch
             serviceInputs:
               serviceDefinition:
                 type: Kubernetes
@@ -24,6 +23,7 @@ pipeline:
                     primary:
                       primaryArtifactRef: <+input>
                       sources: <+input>
+            gitBranch: main
           environment:
             environmentRef: dev
             deployToAll: false
