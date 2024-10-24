@@ -14,8 +14,8 @@ pipeline:
         spec:
           deploymentType: Kubernetes
           service:
-            serviceRef: gitbackedtestsvc
-            gitBranch: main
+            serviceRef: <+input>
+            serviceInputs: <+input>
           environment:
             environmentRef: dev
             deployToAll: false
