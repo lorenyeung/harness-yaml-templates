@@ -18,6 +18,7 @@ pipeline:
             spec:
               service:
                 serviceRef: <+input>
+                gitBranch: main
                 serviceInputs: <+input>
               environment:
                 infrastructureDefinitions:
