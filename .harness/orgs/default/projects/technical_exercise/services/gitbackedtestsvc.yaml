@@ -29,4 +29,15 @@ service:
           description: ""
           required: false
           value: ""
+      artifacts:
+        primary:
+          primaryArtifactRef: <+input>
+          sources:
+            - spec:
+                connectorRef: account.lorenharnessdockerhub
+                imagePath: library/alpine
+                tag: <+input>
+                digest: ""
+              identifier: artifact
+              type: DockerRegistry
     type: Kubernetes
