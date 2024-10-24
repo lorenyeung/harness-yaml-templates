@@ -23,7 +23,7 @@ pipeline:
                     primary:
                       primaryArtifactRef: <+input>
                       sources: <+input>
-            gitBranch: loren-patch
+            gitBranch: main
           environment:
             environmentRef: dev
             deployToAll: false
