@@ -18,7 +18,7 @@ service:
                   paths:
                     - kubernetes/manifests/alpine/
                   repoName: harness-yaml-templates
-                  branch: loren-patch
+                  branch: main
               valuesPaths:
                 - kubernetes/manifests/alpine/values.yaml
               skipResourceVersioning: false
