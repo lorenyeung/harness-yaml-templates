@@ -1,6 +1,6 @@
 namespace: <+infra.namespace>
 replicas: 10
-name: <+service.identifier>
+name: <+service.identifier>lorenpatch
 image: <+artifacts.primary.imagePath>
 tag: <+artifacts.primary.tag>
 
