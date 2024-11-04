@@ -25,8 +25,12 @@ pipeline:
                     spec:
                       artifacts:
                         primary:
-                          primaryArtifactRef: ""
-                          sources: ""
+                          primaryArtifactRef: artifact
+                          sources:
+                            - identifier: artifact
+                              type: DockerRegistry
+                              spec:
+                                tag: <+input>
               environment:
                 infrastructureDefinitions:
                   - identifier: colimak8sinfra
