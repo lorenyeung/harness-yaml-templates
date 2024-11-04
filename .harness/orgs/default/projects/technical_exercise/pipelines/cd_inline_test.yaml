@@ -17,9 +17,16 @@ pipeline:
             type: Deployment
             spec:
               service:
-                serviceRef: <+input>
+                serviceRef: gitbackedtestsvc
                 gitBranch: loren-patch
-                serviceInputs: <+input>
+                serviceInputs:
+                  serviceDefinition:
+                    type: Kubernetes
+                    spec:
+                      artifacts:
+                        primary:
+                          primaryArtifactRef: ""
+                          sources: ""
               environment:
                 infrastructureDefinitions:
                   - identifier: colimak8sinfra
