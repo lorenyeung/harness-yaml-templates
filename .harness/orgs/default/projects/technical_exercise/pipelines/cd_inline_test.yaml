@@ -30,6 +30,7 @@ pipeline:
                               type: DockerRegistry
                               spec:
                                 tag: <+input>
+                gitBranch: loren-patch
               environment:
                 infrastructureDefinitions:
                   - identifier: colimak8sinfra
