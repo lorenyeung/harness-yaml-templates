@@ -6,36 +6,58 @@ pipeline:
   tags:
     "29": ""
   stages:
-    - stage:
-        name: cd
-        identifier: cd
-        tags: {}
-        template:
-          templateRef: rollinggitxtest
-          versionLabel: v1.0.0
-          templateInputs:
-            type: Deployment
-            spec:
-              service:
-                serviceRef: gitbackedtestsvc
-                serviceInputs:
-                  serviceDefinition:
-                    type: Kubernetes
-                    spec:
-                      artifacts:
-                        primary:
-                          primaryArtifactRef: artifact
-                          sources:
-                            - identifier: artifact
-                              type: DockerRegistry
-                              spec:
-                                tag: <+input>
-                gitBranch: loren-patch
-              environment:
-                infrastructureDefinitions:
-                  - identifier: colimak8sinfra
-                    inputs:
-                      identifier: colimak8sinfra
-                      type: KubernetesDirect
-                      spec:
-                        namespace: <+input>.default(loren-dev)
+    - parallel:
+        - stage:
+            name: cd
+            identifier: cd
+            tags: {}
+            template:
+              templateRef: rollinggitxtest
+              versionLabel: v1.0.0
+              templateInputs:
+                type: Deployment
+                spec:
+                  service:
+                    serviceRef: gitbackedtestsvc
+                    serviceInputs:
+                      serviceDefinition:
+                        type: Kubernetes
+                        spec:
+                          artifacts:
+                            primary:
+                              primaryArtifactRef: artifact
+                              sources:
+                                - identifier: artifact
+                                  type: DockerRegistry
+                                  spec:
+                                    tag: <+input>
+                    gitBranch: loren-patch
+                  environment:
+                    infrastructureDefinitions:
+                      - identifier: colimak8sinfra
+                        inputs:
+                          identifier: colimak8sinfra
+                          type: KubernetesDirect
+                          spec:
+                            namespace: <+input>.default(loren-dev)
+        - stage:
+            name: cd2
+            identifier: cd2
+            tags: {}
+            template:
+              templateRef: rollinggitxtest
+              versionLabel: v1.0.0
+              templateInputs:
+                type: Deployment
+                spec:
+                  service:
+                    useFromStage:
+                      stage: cd
+                  environment:
+                    infrastructureDefinitions:
+                      - identifier: colimak8sinfra
+                        inputs:
+                          identifier: colimak8sinfra
+                          type: KubernetesDirect
+                          spec:
+                            namespace: <+input>.default(loren-dev)
