@@ -18,7 +18,6 @@ pipeline:
             spec:
               service:
                 serviceRef: gitbackedtestsvc
-                gitBranch: loren-patch
                 serviceInputs:
                   serviceDefinition:
                     type: Kubernetes
