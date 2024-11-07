@@ -16,5 +16,6 @@ spec:
       containers:
       - name: alpine
         image: {{.Values.image}}:{{.Values.tag}}
+        command: ["sleep", "600"]
         ports:
         - containerPort: 80
