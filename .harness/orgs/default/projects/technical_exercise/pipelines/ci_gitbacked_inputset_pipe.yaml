@@ -3,7 +3,9 @@ pipeline:
   identifier: ci_gitbacked_inputset_pipe
   projectIdentifier: technical_exercise
   orgIdentifier: default
-  tags: {}
+  tags:
+    "14": ""
+    ci: ""
   stages:
     - stage:
         name: something
@@ -26,4 +28,12 @@ pipeline:
                   identifier: Run_1
                   spec:
                     shell: Sh
-                    command: <+input>
+                    command: |-
+                      echo <+trigger.payload.head_commit.message>
+                      echo "var:" <+pipeline.variables.branch>
+  variables:
+    - name: branch
+      type: String
+      description: ""
+      required: false
+      value: <+input>
