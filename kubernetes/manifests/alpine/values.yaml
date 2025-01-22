@@ -1,7 +1,7 @@
 namespace: <+infra.namespace>
 replicas: 1
 name: <+service.identifier>
-image: <+artifacts.primary.imagePath>
+image: <+variable.account.image_registry>/<+artifacts.primary.imagePath>
 tag: <+artifacts.primary.tag>
 
 serviceType: LoadBalancer
