@@ -1,0 +1,17 @@
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: {{.Values.containers.name }}-{{ .Values.deployment.stageRoute }} 
+spec:
+  host: {{ .Values.deployment.stageHost }}
+  path: {{ .Values.deployment.stagePath | default "/" }}
+  to:
+    kind: Service
+    name: {{.Values.containers.name }}-svc-stage
+    weight: 100
+  port:
+    targetPort: {{.Values.deployment.stagePort }}
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Allow
+    wildcardPolicy: None
