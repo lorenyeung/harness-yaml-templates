@@ -1,7 +1,7 @@
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: {{ .Values.name }}-{{ .Values.deployment.stageRoute }}
+  name: "{{ .Values.name }}-{{ .Values.deployment.stageRoute }}"
   namespace: {{ .Values.namespace }}
 
 spec:
