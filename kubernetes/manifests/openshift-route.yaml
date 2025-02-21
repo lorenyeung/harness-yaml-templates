@@ -4,7 +4,17 @@ metadata:
   name: {{ .Values.name }}-{{ .Values.deployment.stageRoute }}
   namespace: {{ .Values.namespace }}
   labels:
-    app.kubernetes.io/name: {{ .Values.name }}
+    ## Common Labels
+    # helm.sh/chart: # app-comp.chart
+    # app.kubernetes.io/version: # chart.appversion
+    app.kubernetes.io/managed-by: # .Release.Service
+    app.kubernetes.io/part-of: {{ .Values.name }}
+    ## selector labels
+    app.kubernetes.io/name: {{ .Values.name }} #app comp Name
+    app.kubernetes.io/instance: {{ .Values.name }} #.Release.Name
+    # meta.helm.sh/release-namespace: {{ .Values.namespace }} # .Release.Namespace
+    # meta.helm.sh/release-name: {{ .Values.name }} # .Release.Name
+    ## app component annotations
 spec:
   host: {{ .Values.deployment.stageHost }}
   path: {{ .Values.deployment.stagePath }}
