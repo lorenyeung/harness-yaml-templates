@@ -5,7 +5,6 @@ metadata:
   namespace: {{ .Values.namespace }}
   labels:
     app.kubernetes.io/name: {{ .Values.name }}
-    app.kubernetes.io/managed-by: {{ .Release.Service }}
 spec:
   host: {{ .Values.deployment.stageHost }}
   path: {{ .Values.deployment.stagePath }}
