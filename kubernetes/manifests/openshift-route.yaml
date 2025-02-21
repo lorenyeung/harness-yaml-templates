@@ -4,6 +4,7 @@ metadata:
   name: "{{ .Values.name }}-{{ .Values.deployment.stageRoute }}"
   namespace: {{ .Values.namespace }}
   labels:
+    app.kubernetes.io/name: {{ .Values.name }}
     #app.kubernetes.io/managed-by: {{ .Release.Service }}
     #{{- include "application-component.labels" . | nindent 4 }}
 spec:
