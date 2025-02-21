@@ -3,13 +3,14 @@ kind: Route
 metadata:
   name: "{{ .Values.name }}-{{ .Values.deployment.stageRoute }}"
   namespace: {{ .Values.namespace }}
-
+  labels:
+    {{- include "application-component.labels" . | nindent 4 }}
 spec:
   host: {{ .Values.deployment.stageHost }}
   path: {{ .Values.deployment.stagePath }}
   to:
     kind: Service
-    name: {{ .Values.name }}-svc-stage
+    name: "{{ .Values.name }}-svc-stage"
     weight: 100
   port:
     targetPort: {{ .Values.serviceTargetPort }}
