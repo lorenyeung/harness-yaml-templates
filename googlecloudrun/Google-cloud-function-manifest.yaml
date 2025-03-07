@@ -6,5 +6,3 @@ function:
   buildConfig:
     runtime: python311
     entryPoint: hello_world
-    environmentVariables:
-      GOOGLE_FUNCTION_SOURCE: hello_world.py
