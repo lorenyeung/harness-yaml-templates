@@ -1,5 +1,5 @@
 # Following are the minimum set of parameters required to create a Google Cloud Function.
-# Please make sure your uploaded manifest file includes all of them.
+# Please make sure your uploaded manifest file includes all of them. 
 
 function:
   name: googlecloudrunsvc
