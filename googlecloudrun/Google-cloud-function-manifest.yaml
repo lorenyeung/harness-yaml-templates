@@ -5,4 +5,4 @@ function:
   name: googlecloudrunsvc
   buildConfig:
     runtime: python311
-    entryPoint: hello_world
+    entryPoint: home
