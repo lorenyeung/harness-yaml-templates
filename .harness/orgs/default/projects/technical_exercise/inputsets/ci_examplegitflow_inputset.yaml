@@ -1,5 +1,6 @@
 inputSet:
   name: test
+  tags: {}
   identifier: test
   orgIdentifier: default
   projectIdentifier: technical_exercise
@@ -9,6 +10,6 @@ inputSet:
       ci:
         codebase:
           build:
-            type: PR
+            type: branch
             spec:
-              number: <+trigger.prNumber>
+              branch: main
