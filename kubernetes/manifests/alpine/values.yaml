@@ -13,8 +13,8 @@ serviceTargetPort: 80
 env:
   config:
 #    vaulttest: <_+secrets.getValue("hashicorpvault://tmpvaultoidc/default/technical_exercise/my_first_secret#db_password")>
-    name: vaulttest:
-    value: tmp
-  secrets:
-    name: key2
-    value: value2
+    - name: vaulttest:
+      value: tmp
+#  secrets:
+#    name: key2
+#    value: value2
