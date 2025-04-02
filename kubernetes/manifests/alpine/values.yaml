@@ -10,10 +10,10 @@ servicePort: 80
 serviceTargetPort: 80
 
 # Both are added to the container environment in podSpec as envFrom source.
+# vaulttest: <_+secrets.getValue("hashicorpvault://tmpvaultoidc/default/technical_exercise/my_first_secret#db_password")>
 env:
   config:
-#    vaulttest: <_+secrets.getValue("hashicorpvault://tmpvaultoidc/default/technical_exercise/my_first_secret#db_password")>
-    - name: vaulttest:
+    - name: vaulttest
       value: tmp
 #  secrets:
 #    name: key2
