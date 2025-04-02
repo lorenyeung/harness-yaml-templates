@@ -14,7 +14,7 @@ serviceTargetPort: 80
 env:
   config:
     - name: vaulttest
-      value: tmp
+      value: <+serviceVariables.TF_OVERRIDE>
 #  secrets:
 #    name: key2
 #    value: value2
