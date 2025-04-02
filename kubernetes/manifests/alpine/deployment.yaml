@@ -20,7 +20,7 @@ spec:
         ports:
         - containerPort: 80
         env:
-            {{- range .env.config }}
+            {{- range .Values.env.config }}
             - name: {{ .name }}
               value: {{ .value }}
             {{- end }}
