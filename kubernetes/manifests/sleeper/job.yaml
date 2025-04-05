@@ -1,0 +1,13 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: steady-state-test
+spec:
+  template:
+    spec:
+      containers:
+      - name: sleeper
+        image: alpine:latest
+        command: ["sleep", "3600"]  # sleep for 1 hour
+      restartPolicy: Never
+  backoffLimit: 0
