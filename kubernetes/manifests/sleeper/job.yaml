@@ -8,6 +8,6 @@ spec:
       containers:
       - name: sleeper
         image: alpine:latest
-        command: ["sleep", "3600"]  # sleep for 1 hour
+        command: ["sleep", "120"]  # sleep for 2 minutes
       restartPolicy: Never
   backoffLimit: 0
