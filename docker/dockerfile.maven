@@ -1,5 +1,5 @@
 ARG tag
-FROM maven:3.6.3-jdk-8 AS build-stage
+FROM maven:3.8.6-jdk-8 AS build-stage
 RUN whoami
 RUN git clone https://github.com/lorenyeung/java-maven-junit-helloworld
 WORKDIR java-maven-junit-helloworld
