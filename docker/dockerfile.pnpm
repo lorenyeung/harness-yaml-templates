@@ -4,11 +4,11 @@ ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
 WORKDIR /app
 COPY package.json pnpm-lock.yaml /app
+RUN --mount-type=secret,id=NPM_TOKEN npm config set //npmsecrets.com/:_authToken=$(cat /run/secrets/NPM_TOKEN)
 RUN pnpm install --frozen-lockfile
 COPY . .
 
 FROM base AS build
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store pnpm install --frozen-lockfile
 RUN pnpm run build
 
 FROM base AS test
