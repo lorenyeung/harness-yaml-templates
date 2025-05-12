@@ -9,9 +9,8 @@ RUN --mount=type=secret,id=NPM_TOKEN \
 
 RUN true
 
-RUN pnpm config set store-dir /pnpm/store; \
-    pnpm install --frozen-lockfile
-
+RUN pnpm install --frozen-lockfile
+RUN true
 COPY . .
 
 FROM base AS build
