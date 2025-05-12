@@ -7,8 +7,7 @@ COPY package.json pnpm-lock.yaml /app
 RUN --mount=type=secret,id=NPM_TOKEN \
     sh -c 'npm config set //npmsecrets.com/:_authToken=$(cat /run/secrets/NPM_TOKEN)'
 
-RUN --mount=type=cache,id=pnpm,target=/pnpm/store \
-    pnpm config set store-dir /pnpm/store && \
+RUN pnpm config set store-dir /pnpm/store; \
     pnpm install --frozen-lockfile
 RUN ls -R /pnpm/store
 COPY . .
