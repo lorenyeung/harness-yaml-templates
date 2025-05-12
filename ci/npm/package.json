@@ -1,0 +1,25 @@
+{
+  "name": "my-pnpm-app",
+  "version": "1.0.0",
+  "description": "A Node.js app using pnpm",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "test": "echo \"No test specified\" && exit 0"
+  },
+  "keywords": ["pnpm", "node"],
+  "author": "Your Name",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=18",
+    "pnpm": ">=8"
+  },
+  "packageManager": "pnpm@8.15.4"
+}
