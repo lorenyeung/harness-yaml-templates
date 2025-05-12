@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build": "echo 'No build step defined'",
+    "build": "echo 'No build step defined'; mkdir dist",
     "test": "echo \"No test specified\" && exit 0"
   },
   "keywords": ["pnpm", "node"],
