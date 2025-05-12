@@ -10,7 +10,7 @@ RUN --mount=type=secret,id=NPM_TOKEN \
 RUN true
 
 RUN pnpm install --frozen-lockfile
-RUN true
+
 COPY . .
 
 FROM base AS build
