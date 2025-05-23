@@ -3,7 +3,8 @@ pipeline:
   identifier: ci_debug_mode_test
   projectIdentifier: technical_exercise
   orgIdentifier: default
-  tags: {}
+  tags:
+    "34": ""
   stages:
     - stage:
         name: ci
@@ -27,3 +28,15 @@ pipeline:
                   spec:
                     shell: Sh
                     command: this is a test
+              - step:
+                  name: test
+                  identifier: test
+                  template:
+                    templateRef: account.runversioning
+                    versionLabel: main
+                    gitBranch: main
+                    templateInputs:
+                      type: Run
+                      spec:
+                        connectorRef: <+input>
+                        image: <+input>
