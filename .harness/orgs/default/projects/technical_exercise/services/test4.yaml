@@ -1,0 +1,5 @@
+service:
+  name: test4
+  identifier: test4
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
