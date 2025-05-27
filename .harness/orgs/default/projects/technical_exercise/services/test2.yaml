@@ -1,0 +1,5 @@
+service:
+  name: test2
+  identifier: test2
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
