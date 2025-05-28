@@ -12,7 +12,7 @@ RUN --mount=type=secret,id=NPM_TOKEN \
 RUN pnpm install --frozen-lockfile
 #RUN true
 COPY . .
-
+RUN git clone git@github.com:lorenyeung/gitops-examples-public.git
 FROM base AS build
 RUN pnpm run build
 
