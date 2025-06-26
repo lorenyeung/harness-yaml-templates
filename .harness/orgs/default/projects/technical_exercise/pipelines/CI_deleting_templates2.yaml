@@ -15,6 +15,7 @@ pipeline:
           execution:
             steps:
               - step:
+                  type: Run
                   name: Run_1
                   identifier: Run_1
                   template:
