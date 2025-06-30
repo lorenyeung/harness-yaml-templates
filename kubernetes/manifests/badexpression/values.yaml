@@ -1,0 +1,20 @@
+namespace: <+infra.namespace>
+replicas: 1
+name: <+service.identifier>
+image: <+serviceVariables.image_registry>/<+artifacts.primary.imagePath>
+tag: <+artifacts.primary.tag>
+
+serviceType: LoadBalancer
+
+servicePort: 80
+serviceTargetPort: 80
+
+# Both are added to the container environment in podSpec as envFrom source.
+# vaulttest: <_+secrets.getValue("hashicorpvault://tmpvaultoidc/default/technical_exercise/my_first_secret#db_password")>
+env:
+  config:
+    - name: vaulttest
+      value: <+serviceVariables.TF_OVERRIDE_dont_work>
+#  secrets:
+#    name: key2
+#    value: value2
