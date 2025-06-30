@@ -1,8 +1,8 @@
-namespace: <+infra.namespace>
+namespace: default
 replicas: 1
-name: <+service.identifier>
-image: <+serviceVariables.image_registry>/<+artifacts.primary.imagePath>
-tag: <+artifacts.primary.tag>
+name: badexpression
+image: alpine
+tag: latest
 
 serviceType: LoadBalancer
 
