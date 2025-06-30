@@ -14,7 +14,7 @@ vaulttest: <_+secrets.getValue("hashicorpvault://<+pipeline.variables.secretsPat
 env:
   config:
     - name: vaulttest
-      value: <+serviceVariables.TF_OVERRIDE_dont_work>
+      value: <+serviceVariables.environment>
 #  secrets:
 #    name: key2
 #    value: value2
