@@ -3,6 +3,8 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: steady-state-test
+  labels:
+    harness.io/release-name: k8s-job-alpine-svc
 spec:
   template:
     spec:
