@@ -6,3 +6,5 @@ function:
   buildConfig:
     runtime: python311
     entryPoint: start
+  serviceConfig:
+    serviceAccountEmail: <+serviceVariables.service_account>
