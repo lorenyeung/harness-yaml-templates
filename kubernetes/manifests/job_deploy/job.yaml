@@ -1,0 +1,12 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: my-job
+spec:
+  template:
+    spec:
+      containers:
+      - name: job
+        image: alpine:latest
+        command: ["echo", "this is a job"]
+      restartPolicy: Never
