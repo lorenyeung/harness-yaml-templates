@@ -6,5 +6,6 @@ function:
   buildConfig:
     runtime: python311
     entryPoint: start
-  serviceConfig:
-    serviceAccountEmail: <+serviceVariables.service_account>
+    # requires serviceAccountUser permissions
+  # serviceConfig:
+  #   serviceAccountEmail: <+serviceVariables.service_account>
