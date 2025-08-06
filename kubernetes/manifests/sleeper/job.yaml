@@ -8,6 +8,9 @@ metadata:
     harness.io/release-name: k8s-job-alpine-svc-release
 spec:
   template:
+    metadata:
+      labels:
+        harness.io/release-name: k8s-job-alpine-svc-release
     spec:
       containers:
       - name: sleeper
