@@ -13,6 +13,8 @@ spec:
     metadata:
       labels:
         harness.io/release-name: k8s-job-svc-release
+        harness.io/release: k8s-job-svc-release
+        release: k8s-job-svc-release
         app: k8sjobsvc
         app.kubernetes.io/name: k8sjobsvc-deployment
     spec:
