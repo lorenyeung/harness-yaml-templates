@@ -3,7 +3,8 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: k8s-job-svc
+  #name: k8s-job-svc
+  generateName: k8s-job-svc-
   labels:
     app: k8sjobsvc
     app.kubernetes.io/name: k8sjobsvc-deployment
