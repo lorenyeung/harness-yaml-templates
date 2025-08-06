@@ -1,4 +1,5 @@
-# harness.io/skip-file-for-deploy
+# harness.io/
+#skip-file-for-deploy
 apiVersion: batch/v1
 kind: Job
 metadata:
@@ -13,4 +14,3 @@ spec:
         image: alpine:latest
         command: ["sleep", "120"]  # sleep for 2 minutes
       restartPolicy: Never
-  backoffLimit: 0
