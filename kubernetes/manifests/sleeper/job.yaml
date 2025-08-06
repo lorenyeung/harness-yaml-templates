@@ -5,6 +5,8 @@ kind: Job
 metadata:
   name: k8s-job-svc
   labels:
+    app: k8sjobsvc
+    app.kubernetes.io/name: k8sjobsvc-deployment
     harness.io/release-name: k8s-job-svc-release
 spec:
   template:
