@@ -5,7 +5,7 @@ kind: Job
 metadata:
   name: steady-state-test
   labels:
-    harness.io/release-name: k8s-job-alpine-svc
+    harness.io/release-name: k8s-job-alpine-svc-release
 spec:
   template:
     spec:
