@@ -3,14 +3,16 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
-  name: steady-state-test
+  name: k8s-job-svc
   labels:
-    harness.io/release-name: k8s-job-alpine-svc-release
+    harness.io/release-name: k8s-job-svc-release
 spec:
   template:
     metadata:
       labels:
-        harness.io/release-name: k8s-job-alpine-svc-release
+        harness.io/release-name: k8s-job-svc-release
+        app: k8sjobsvc
+        app.kubernetes.io/name: k8sjobsvc-deployment
     spec:
       containers:
       - name: sleeper
