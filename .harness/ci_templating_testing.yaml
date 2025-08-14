@@ -1,0 +1,34 @@
+pipeline:
+  name: ci - templating testing
+  identifier: ci_templating_testing
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags:
+    "36": ""
+    template: ""
+    ci: ""
+  stages:
+    - stage:
+        name: ci
+        identifier: ci
+        description: ""
+        type: CI
+        spec:
+          cloneCodebase: false
+          execution:
+            steps:
+              - step:
+                  name: blah
+                  identifier: blah
+                  template:
+                    templateRef: otherrepotest
+                    versionLabel: v1
+                    gitBranch: main
+          infrastructure:
+            type: KubernetesDirect
+            spec:
+              connectorRef: account.sagcpk8s
+              namespace: loren-dev
+              automountServiceAccountToken: true
+              nodeSelector: {}
+              os: Linux
