@@ -27,7 +27,7 @@ pipeline:
           infrastructure:
             type: KubernetesDirect
             spec:
-              connectorRef: account.sagcpk8s
+              connectorRef: account.colimak8s
               namespace: loren-dev
               automountServiceAccountToken: true
               nodeSelector: {}
