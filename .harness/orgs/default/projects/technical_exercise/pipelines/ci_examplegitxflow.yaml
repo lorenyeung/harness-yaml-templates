@@ -37,6 +37,7 @@ pipeline:
                         https://api.github.com/repos/lorenyeung/pcf-go-sample-app/releases/latest | jq -r '.tag_name')
                       NEXTVERSION=$(echo $tag_name | awk -F. -v OFS=. '{$NF += 1 ; print}')
                       echo $NEXTVERSION
+                      echo "change something 2"
                     outputVariables:
                       - name: NEXTVERSION
           platform:
