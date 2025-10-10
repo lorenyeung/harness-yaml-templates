@@ -1,5 +1,5 @@
 template:
-  name: Copy Something
+  name: Copy Something New Branch
   type: Step
   spec:
     type: Run
