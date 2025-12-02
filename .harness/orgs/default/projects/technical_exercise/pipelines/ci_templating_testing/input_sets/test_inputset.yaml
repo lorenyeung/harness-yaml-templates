@@ -1,0 +1,26 @@
+inputSet:
+  name: test_inputset
+  identifier: test_inputset
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
+  pipeline:
+    identifier: ci_templating_testing
+    stages:
+      - stage:
+          identifier: ci
+          type: CI
+          spec:
+            execution:
+              steps:
+                - step:
+                    identifier: blah
+                    template:
+                      templateInputs:
+                        type: Run
+                        spec:
+                          envVariables:
+                            hello: ""
+    variables:
+      - name: input_test
+        type: String
+        value: <+input>
