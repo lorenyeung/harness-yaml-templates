@@ -37,3 +37,9 @@ pipeline:
               automountServiceAccountToken: true
               nodeSelector: {}
               os: Linux
+  variables:
+    - name: input_test
+      type: String
+      description: ""
+      required: false
+      value: <+input>
