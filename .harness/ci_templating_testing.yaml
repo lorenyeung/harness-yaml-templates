@@ -24,6 +24,11 @@ pipeline:
                     templateRef: otherrepotest
                     versionLabel: v1
                     gitBranch: main
+                    templateInputs:
+                      type: Run
+                      spec:
+                        envVariables:
+                          hello: <+input>
           infrastructure:
             type: KubernetesDirect
             spec:
