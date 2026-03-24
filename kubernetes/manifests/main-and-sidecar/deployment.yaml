@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: multi-container-app
+  labels:
+    app: multi-container-app
+spec:
+  type: {{ .Values.service.type }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: {{ .Values.mainApp.port }}
+      protocol: TCP
+      name: http
+  selector:
+    app: multi-container-app
+➜  deployment-with-sidecar cat deployment.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multi-container-app
+  labels:
+    app: multi-container-app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: multi-container-app
+  template:
+    metadata:
+      labels:
+        app: multi-container-app
+    spec:
+      containers:
+        - name: {{ .Values.mainApp.name }}
+          image: "{{ .Values.mainApp.image.repository }}:{{ .Values.mainApp.image.tag }}"
+          imagePullPolicy: {{ .Values.mainApp.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.mainApp.port }}
+          resources:
+            requests:
+              cpu: {{ .Values.mainApp.resources.requests.cpu }}
+              memory: {{ .Values.mainApp.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.mainApp.resources.limits.cpu }}
+              memory: {{ .Values.mainApp.resources.limits.memory }}
+
+        - name: {{ .Values.sidecar.name }}
+          image: "{{ .Values.sidecar.image.repository }}:{{ .Values.sidecar.image.tag }}"
+          imagePullPolicy: {{ .Values.sidecar.image.pullPolicy }}
+          command: {{ toJson .Values.sidecar.command }}
+          resources:
+            requests:
+              cpu: {{ .Values.sidecar.resources.requests.cpu }}
+              memory: {{ .Values.sidecar.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.sidecar.resources.limits.cpu }}
+              memory: {{ .Values.sidecar.resources.limits.memory }}
