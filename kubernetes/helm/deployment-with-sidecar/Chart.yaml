@@ -1,0 +1,6 @@
+apiVersion: v2
+name: multi-container-app
+description: A Helm chart deploying a main app and sidecar as separate pods
+type: application
+version: 0.1.0
+appVersion: "1.0.0"

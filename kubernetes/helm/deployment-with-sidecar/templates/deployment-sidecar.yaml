@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-sidecar
+  labels:
+    app: {{ .Release.Name }}-sidecar
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-sidecar
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-sidecar
+    spec:
+      containers:
+        - name: {{ .Values.sidecar.name }}
+          image: "{{ .Values.sidecar.image.repository }}:{{ .Values.sidecar.image.tag }}"
+          imagePullPolicy: {{ .Values.sidecar.image.pullPolicy }}
+          command: {{ toJson .Values.sidecar.command }}
+          resources:
+            requests:
+              cpu: {{ .Values.sidecar.resources.requests.cpu }}
+              memory: {{ .Values.sidecar.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.sidecar.resources.limits.cpu }}
+              memory: {{ .Values.sidecar.resources.limits.memory }}

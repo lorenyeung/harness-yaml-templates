@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-main-app
+  labels:
+    app: {{ .Release.Name }}-main-app
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-main-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-main-app
+    spec:
+      containers:
+        - name: {{ .Values.mainApp.name }}
+          image: "{{ .Values.mainApp.image.repository }}:{{ .Values.mainApp.image.tag }}"
+          imagePullPolicy: {{ .Values.mainApp.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.mainApp.port }}
+          resources:
+            requests:
+              cpu: {{ .Values.mainApp.resources.requests.cpu }}
+              memory: {{ .Values.mainApp.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.mainApp.resources.limits.cpu }}
+              memory: {{ .Values.mainApp.resources.limits.memory }}
