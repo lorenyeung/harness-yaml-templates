@@ -1,18 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: multi-container-app
+  name: main-app
   labels:
-    app: multi-container-app
+    app: main-app
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: multi-container-app
+      app: main-app
   template:
     metadata:
       labels:
-        app: multi-container-app
+        app: main-app
     spec:
       containers:
         - name: {{ .Values.mainApp.name }}
@@ -27,7 +27,24 @@ spec:
             limits:
               cpu: {{ .Values.mainApp.resources.limits.cpu }}
               memory: {{ .Values.mainApp.resources.limits.memory }}
-
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sidecar
+  labels:
+    app: sidecar
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: sidecar
+  template:
+    metadata:
+      labels:
+        app: sidecar
+    spec:
+      containers:
         - name: {{ .Values.sidecar.name }}
           image: "{{ .Values.sidecar.image.repository }}:{{ .Values.sidecar.image.tag }}"
           imagePullPolicy: {{ .Values.sidecar.image.pullPolicy }}
