@@ -1,4 +1,4 @@
-replicaCount: 1
+replicaCount: <+pipeline.variables.replicaCount>.default("1")
 
 mainApp:
   name: main-app
