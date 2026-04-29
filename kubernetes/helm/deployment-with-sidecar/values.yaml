@@ -1,6 +1,7 @@
-replicaCount: 2
+
 
 mainApp:
+  replicaCount: 2
   name: main-app
   image:
     repository: nginx
@@ -16,6 +17,7 @@ mainApp:
       memory: 256Mi
 
 sidecar:
+  replicaCount: 2
   name: sidecar
   image:
     repository: busybox
