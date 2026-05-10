@@ -1,7 +1,7 @@
 
 
 mainApp:
-  replicaCount: <+<+pipeline.variables.mainAppReplicaCount> != "" ? <+pipeline.variables.mainAppReplicaCount> : 2>
+  replicaCount: <+<+expression.isResolved(<+pipeline.variables.mainAppReplicaCount>)> ? <+pipeline.variables.mainAppReplicaCount> : 2>
   name: main-app
   image:
     repository: <+artifacts.primary.imagePath>
