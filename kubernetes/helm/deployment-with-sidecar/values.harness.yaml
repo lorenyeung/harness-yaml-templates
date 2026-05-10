@@ -1,7 +1,7 @@
 
 
 mainApp:
-  replicaCount: <+pipeline.variables.mainAppReplicaCount.default(2)>
+  replicaCount: <+pipeline.variables.mainAppReplicaCount == null || pipeline.variables.mainAppReplicaCount == "" ? 2 : pipeline.variables.mainAppReplicaCount>
   name: main-app
   image:
     repository: <+artifacts.primary.imagePath>
@@ -17,7 +17,7 @@ mainApp:
       memory: 256Mi
 
 sidecar:
-  replicaCount: <+pipeline.variables.sidecarReplicaCount.default(2)>
+  replicaCount: <+pipeline.variables.sidecarReplicaCount == null || pipeline.variables.sidecarReplicaCount == "" ? 2 : pipeline.variables.sidecarReplicaCount>
   name: sidecar
   image:
     repository: <+artifacts.sidecars.busybox.imagePath>
