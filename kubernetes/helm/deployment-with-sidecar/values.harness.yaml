@@ -17,7 +17,7 @@ mainApp:
       memory: 256Mi
 
 sidecar:
-  replicaCount: <+<+pipeline.variables.sidecarReplicaCount> != "" ? <+pipeline.variables.sidecarReplicaCount> : 2>
+  replicaCount: <+<+expression.isResolved(<+pipeline.variables.sidecarReplicaCount>)> != "" ? <+pipeline.variables.sidecarReplicaCount> : 2>
   name: sidecar
   image:
     repository: <+artifacts.sidecars.busybox.imagePath>
