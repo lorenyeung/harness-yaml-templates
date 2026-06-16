@@ -1,0 +1,11 @@
+inputSet:
+  name: branchinputset
+  identifier: branchinputset
+  orgIdentifier: default
+  projectIdentifier: technical_exercise
+  pipeline:
+    identifier: test_gitx
+    variables:
+      - name: branch
+        type: String
+        value: <+trigger.payload.repository.name>
