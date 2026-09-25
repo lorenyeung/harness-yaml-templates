@@ -1,0 +1,32 @@
+pipeline:
+  name: iacm - onboarding pipeline module registry
+  identifier: iacm_onboarding_pipeline
+  projectIdentifier: technical_exercise
+  orgIdentifier: default
+  tags:
+    "0": ""
+    iacm: ""
+  stages:
+    - stage:
+        name: iacm
+        identifier: iacm
+        description: ""
+        type: IACM
+        spec:
+          platform:
+            os: Linux
+            arch: Amd64
+          runtime:
+            type: Cloud
+            spec: {}
+          execution:
+            steps:
+              - step:
+                  type: IACMModuleTestPlugin
+                  name: IACM Module Onboard
+                  identifier: IACMModuleOnboardPlugin_1
+                  spec:
+                    command: module-onboarding
+                  timeout: 10m
+          moduleId: <+input>
+        tags: {}
