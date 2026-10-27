@@ -30,3 +30,4 @@ pipeline:
                   timeout: 10m
           moduleId: <+input>
         tags: {}
+  description: onboard modules
